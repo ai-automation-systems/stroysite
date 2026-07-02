@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Контакты | [НАЗВАНИЕ КОМПАНИИ]</title>
+<meta name="description" content="Свяжитесь с нами: телефон, WhatsApp, Telegram. Бесплатная консультация по строительству дома и расчёт сметы за 1 день.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Manrope:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Cpath d=%27M16 4 3 15h4v13h8v-8h2v8h8V15h4z%27 fill=%27%23F0A32B%27/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+<!-- ЯНДЕКС.МЕТРИКА: вставьте тот же код счётчика, что и на главной -->
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a class="logo" href="index.html">[НАЗ<b>ВАНИЕ]</b></a>
+    <nav class="main-nav" id="nav">
+      <a href="index.html">Главная</a>
+      <a href="works.html">Наши работы</a>
+      <a href="contacts.html" aria-current="page">Контакты</a>
+    </nav>
+    <a class="header-phone" href="tel:+79000000000" onclick="ymGoal('phone_click')">+7 (900) 000-00-00</a>
+    <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section>
+  <div class="container contact-grid">
+    <div>
+      <span class="section-label">Контакты</span>
+      <h1 style="margin-bottom:12px">Обсудим ваш будущий дом</h1>
+      <p style="color:var(--muted);max-width:460px">Позвоните, напишите в мессенджер или оставьте заявку — ответим в течение рабочего дня. Консультация и предварительный расчёт бесплатны и ни к чему не обязывают.</p>
+      <ul class="contact-list">
+        <li><b>Телефон</b><a href="tel:+79000000000" onclick="ymGoal('phone_click')">+7 (900) 000-00-00</a></li>
+        <li><b>WhatsApp</b><a href="https://wa.me/79000000000">Написать в WhatsApp</a></li>
+        <li><b>Telegram</b><a href="https://t.me/ВАШ_НИК">Написать в Telegram</a></li>
+        <li><b>Почта</b><a href="mailto:info@вашдомен.ru">info@вашдомен.ru</a></li>
+        <li><b>Регион работы</b><span style="font-family:'Oswald',sans-serif;font-size:1.2rem">[РЕГИОН] и область, выезд на участок бесплатно</span></li>
+        <li><b>Режим работы</b><span style="font-family:'Oswald',sans-serif;font-size:1.2rem">Ежедневно 9:00–20:00</span></li>
+      </ul>
+      <!-- Если появится офис — сюда можно добавить карту:
+           Яндекс.Карты → Конструктор карт → вставить iframe -->
+    </div>
+
+    <div class="lead-card">
+      <h3>Оставить заявку</h3>
+      <p>Перезвоним и ответим на вопросы — без навязчивых продаж.</p>
+      <form id="leadForm2" action="https://formspree.io/f/ВАШ_ID" method="POST">
+        <label for="c-name">Ваше имя</label>
+        <input type="text" id="c-name" name="name" required autocomplete="name" placeholder="Иван">
+        <label for="c-phone">Телефон</label>
+        <input type="tel" id="c-phone" name="phone" required autocomplete="tel" placeholder="+7 (___) ___-__-__">
+        <label for="c-msg">Вопрос или пожелания</label>
+        <textarea id="c-msg" name="message" rows="4" placeholder="Например: хочу одноэтажный дом до 5 млн, участок в …"></textarea>
+        <div class="consent">
+          <input type="checkbox" id="c-consent" required>
+          <label for="c-consent">Даю согласие на обработку персональных данных и принимаю <a href="privacy.html">политику конфиденциальности</a></label>
+        </div>
+        <button type="submit" class="btn btn-primary">Получить расчёт</button>
+        <p class="form-status" id="formStatus2"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="logo" href="index.html">[НАЗ<b>ВАНИЕ]</b></a>
+        <p style="margin-top:12px;max-width:340px">Строительство частных домов под ключ в [РЕГИОН]. От проекта до новоселья — с фиксированной сметой и гарантией.</p>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Главная</a>
+        <a href="works.html">Наши работы</a>
+        <a href="contacts.html">Контакты</a>
+      </div>
+      <div class="footer-links">
+        <a href="privacy.html">Политика конфиденциальности</a>
+        <a href="oferta.html">Публичная оферта</a>
+        <a href="tel:+79000000000">+7 (900) 000-00-00</a>
+      </div>
+    </div>
+    <div class="footer-legal">
+      Исполнитель: [ФАМИЛИЯ ИМЯ ОТЧЕСТВО], самозанятый (плательщик НПД), ИНН [ВАШ ИНН].<br>
+      © <span id="year"></span> [НАЗВАНИЕ КОМПАНИИ]. Информация на сайте не является публичной офертой в части цен: точная стоимость определяется договором.
+    </div>
+  </div>
+</footer>
+
+<a class="call-fab" href="tel:+79000000000" onclick="ymGoal('phone_click')">Позвонить бесплатно</a>
+<script src="script.js"></script>
+</body>
+</html>
