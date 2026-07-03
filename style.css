@@ -44,7 +44,7 @@ img{max-width:100%;display:block}
 section{padding:72px 0}
 .section-label{
   font-family:'JetBrains Mono',monospace;
-  font-size:.75rem;color:var(--amber-dark);
+  font-size:.75rem;color:var(--graphite);
   letter-spacing:.15em;text-transform:uppercase;
   display:block;margin-bottom:10px;
 }
@@ -72,7 +72,7 @@ header{
 }
 .header-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
 .logo{font-family:'Oswald',sans-serif;font-size:1.3rem;text-transform:uppercase;text-decoration:none;font-weight:600}
-.logo b{color:var(--amber-dark)}
+.logo b{color:var(--graphite)}
 nav.main-nav{display:flex;gap:26px}
 nav.main-nav a{text-decoration:none;font-size:.92rem;font-weight:600;color:var(--graphite);padding:4px 0;border-bottom:2px solid transparent}
 nav.main-nav a:hover,nav.main-nav a[aria-current="page"]{border-bottom-color:var(--amber)}
@@ -89,7 +89,7 @@ nav.main-nav a:hover,nav.main-nav a[aria-current="page"]{border-bottom-color:var
     repeating-linear-gradient(90deg,transparent,transparent 39px,var(--line) 40px);
 }
 .hero-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:48px;align-items:center}
-.hero h1 b{color:var(--amber-dark)}
+.hero h1 b{color:var(--graphite)}
 .hero-sub{font-size:1.15rem;margin:20px 0 28px;max-width:520px;color:var(--muted)}
 .hero-points{list-style:none;margin:0 0 32px;display:grid;gap:10px}
 .hero-points li{padding-left:28px;position:relative;font-weight:600}
@@ -134,18 +134,18 @@ nav.main-nav a:hover,nav.main-nav a[aria-current="page"]{border-bottom-color:var
 /* ---------- Преимущества ---------- */
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .adv-card{background:var(--white);border-radius:var(--radius);padding:28px;border:1px solid var(--line)}
-.adv-card .num{font-family:'JetBrains Mono',monospace;color:var(--amber-dark);font-size:.8rem}
+.adv-card .num{font-family:'JetBrains Mono',monospace;color:var(--graphite);font-size:.8rem}
 .adv-card h3{margin:10px 0 8px}
 .adv-card p{font-size:.92rem;color:var(--muted)}
 
 /* ---------- Этапы ---------- */
 .dark-section{background:var(--graphite);color:var(--white)}
-.dark-section .section-label{color:var(--amber)}
+.dark-section .section-label{color:var(--white)}
 .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;counter-reset:step}
 .step{background:var(--graphite-2);border-radius:var(--radius);padding:22px 18px;position:relative;counter-increment:step}
 .step::before{
   content:"0" counter(step);
-  font-family:'JetBrains Mono',monospace;color:var(--amber);font-size:.85rem;
+  font-family:'JetBrains Mono',monospace;color:var(--white);font-size:.85rem;
 }
 .step h3{margin:8px 0 6px;font-size:1rem;color:var(--white)}
 .step p{font-size:.85rem;color:#B8BDC4}
@@ -170,7 +170,7 @@ nav.main-nav a:hover,nav.main-nav a[aria-current="page"]{border-bottom-color:var
 /* ---------- FAQ ---------- */
 details{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:12px}
 summary{padding:18px 22px;cursor:pointer;font-weight:700;list-style:none;display:flex;justify-content:space-between;gap:12px}
-summary::after{content:"+";font-family:'Oswald',sans-serif;color:var(--amber-dark);font-size:1.3rem;line-height:1}
+summary::after{content:"+";font-family:'Oswald',sans-serif;color:var(--graphite);font-size:1.3rem;line-height:1}
 details[open] summary::after{content:"–"}
 details .answer{padding:0 22px 18px;color:var(--muted);font-size:.95rem}
 
@@ -239,7 +239,7 @@ footer .logo{color:var(--white)}
 .stats-band{background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:36px 0}
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center}
 .stat b{font-family:'Oswald',sans-serif;font-size:2.4rem;font-weight:600;display:block;line-height:1.1}
-.stat b i{color:var(--amber-dark);font-style:normal}
+.stat b i{color:var(--graphite);font-style:normal}
 .stat span{font-size:.85rem;color:var(--muted)}
 
 /* ---------- Технологии ---------- */
@@ -247,11 +247,11 @@ footer .logo{color:var(--white)}
 .tech-card:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(27,31,36,.12)}
 .tech-card .tech-head{background:var(--graphite);color:var(--white);padding:18px 22px;display:flex;justify-content:space-between;align-items:baseline}
 .tech-card .tech-head h3{color:var(--white)}
-.tech-card .tech-head .mono{color:var(--amber)}
+.tech-card .tech-head .mono{color:var(--white)}
 .tech-card .tech-body{padding:20px 22px;flex:1}
 .tech-card ul{list-style:none;display:grid;gap:8px;margin-top:10px}
 .tech-card ul li{padding-left:20px;position:relative;font-size:.9rem;color:var(--muted)}
-.tech-card ul li::before{content:"—";position:absolute;left:0;color:var(--amber-dark)}
+.tech-card ul li::before{content:"—";position:absolute;left:0;color:var(--graphite)}
 .tech-card .tech-foot{padding:0 22px 20px;font-family:'Oswald',sans-serif;font-size:1.05rem}
 
 /* ---------- Карточки: ховеры ---------- */

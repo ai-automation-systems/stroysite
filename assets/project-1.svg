@@ -38,11 +38,4 @@
   <g stroke="#1B1F24" stroke-width="4" fill="none">
     <polyline points="180,440 180,300 400,190 620,300 620,440 180,440"/><rect x="250" y="340" width="80" height="100"/><rect x="450" y="340" width="110" height="70"/><line x1="150" y1="300" x2="400" y2="180"/><line x1="400" y1="180" x2="650" y2="300"/>
   </g>
-  <g stroke="#D68C15" stroke-width="2" fill="none">
-    <line x1="180" y1="500" x2="620" y2="500"/>
-    <line x1="180" y1="492" x2="180" y2="508"/>
-    <line x1="620" y1="492" x2="620" y2="508"/>
-  </g>
-  <text x="400" y="530" text-anchor="middle" font-size="20" fill="#5E6660">12,0 x 8,0 м</text>
-  <text x="400" y="566" text-anchor="middle" font-size="16" fill="#8A919B">место для фото построенного дома</text>
 </svg>

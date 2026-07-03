@@ -1,0 +1,148 @@
+/* ============================================================
+   КИНЕМАТОГРАФИЧНОЕ ИНТРО НА ФОТО
+   Фасад дома в сумерках → подходим к двери → входим →
+   панорама по интерьеру, на «якорях» всплывают смыслы.
+   Двигаем только «камеру» (transform/opacity) по реальным фото —
+   без рисованной графики, без тяжёлых теней и блюра. Плавно.
+   ============================================================ */
+
+:root{ --amber:#F0A32B; --amber-deep:#D68C15; }
+
+/* высокий трек прокрутки — задаёт длительность всей сцены */
+.enter-house{ position:relative; height:520vh; background:#000; }
+
+/* сцена «прилипает» к экрану, пока листаем трек */
+.eh-stage{
+  position:sticky; top:0; height:100vh; overflow:hidden;
+  background:#0a0a0c;
+}
+
+/* фото-слои: только translate/scale/opacity — дёшево для GPU */
+.eh-layer{ position:absolute; inset:0; will-change:transform,opacity; }
+.eh-layer img{ width:100%; height:100%; object-fit:cover; display:block; }
+.eh-ext{ z-index:1; transform:scale(1.06); }
+.eh-int{ z-index:2; opacity:0; transform-origin:18% 50%; transform:scale(2.3); }
+
+/* тёплая вспышка света в момент «входа в дверь» */
+.eh-flash{
+  position:absolute; inset:0; z-index:3; opacity:0; pointer-events:none;
+  will-change:opacity;
+  background:radial-gradient(60% 60% at 18% 50%, rgba(255,238,205,.95), rgba(255,220,160,.35) 40%, transparent 70%);
+}
+
+/* лёгкая затемняющая подложка для читаемости текста (один слой) */
+.eh-scrim{
+  position:absolute; inset:0; z-index:4; pointer-events:none;
+  background:linear-gradient(180deg, rgba(0,0,0,.42) 0%, rgba(0,0,0,.12) 34%, rgba(0,0,0,.14) 62%, rgba(0,0,0,.62) 100%);
+}
+
+/* ---------- ТЕКСТ ---------- */
+.eh-beats{ position:absolute; inset:0; z-index:5; }
+
+/* стартовый заголовок на фасаде */
+.eh-title{
+  position:absolute; left:0; right:0; top:16%;
+  text-align:center; padding:0 24px; color:#fff;
+  font-family:'Oswald',sans-serif; font-weight:600;
+  font-size:clamp(2rem,6vw,4.4rem); line-height:1.02;
+  text-shadow:0 6px 40px rgba(0,0,0,.7);
+  will-change:opacity,transform; opacity:0;
+}
+.eh-title b{ color:#fff; }
+.eh-title .sub{
+  display:block; margin-top:16px;
+  font-family:'Manrope',sans-serif; font-weight:400;
+  font-size:clamp(.95rem,1.9vw,1.2rem); letter-spacing:.02em;
+  color:#e9e2d6; text-shadow:0 2px 14px rgba(0,0,0,.8);
+}
+
+/* смысловые кадры внутри дома */
+.eh-beat{
+  position:absolute; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; will-change:opacity,transform;
+}
+.eh-beat .inner{
+  max-width:640px; margin:0 24px; text-align:center; color:#fff;
+  background:rgba(18,13,8,.42);
+  border:1px solid rgba(240,163,43,.28);
+  border-radius:20px;
+  padding:34px 40px;
+  box-shadow:0 24px 60px rgba(0,0,0,.35);
+}
+.eh-beat .label{
+  display:inline-block; margin-bottom:14px;
+  font-family:'JetBrains Mono',monospace; font-size:.78rem;
+  letter-spacing:.18em; text-transform:uppercase; color:#fff;
+  padding:6px 14px; border:1px solid rgba(255,255,255,.45);
+  border-radius:100px; background:rgba(255,255,255,.12);
+}
+.eh-beat h2{
+  font-family:'Oswald',sans-serif; font-weight:600;
+  font-size:clamp(1.8rem,5vw,3.4rem); line-height:1.06; margin:0 0 14px;
+  text-shadow:0 4px 30px rgba(0,0,0,.5);
+}
+.eh-beat h2 b{ color:#fff; }
+.eh-beat p{
+  font-family:'Manrope',sans-serif; font-size:clamp(1rem,2.2vw,1.2rem);
+  line-height:1.6; color:#efe8dc; margin:0 auto; max-width:520px;
+}
+.eh-beat .eh-cta{
+  display:inline-block; margin-top:24px;
+  background:var(--amber); color:#1a1206; font-weight:700;
+  font-family:'Manrope',sans-serif; font-size:1.05rem;
+  padding:15px 34px; border-radius:12px; text-decoration:none;
+  box-shadow:0 12px 30px rgba(240,163,43,.4);
+  transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+  cursor:pointer;
+}
+.eh-beat .eh-cta:hover{ background:#ffb43e; transform:translateY(-2px); box-shadow:0 16px 40px rgba(240,163,43,.55); }
+
+/* подсказка «листайте вниз» */
+.eh-hint{
+  position:absolute; left:50%; bottom:5%; z-index:5;
+  transform:translateX(-50%);
+  display:flex; flex-direction:column; align-items:center; gap:10px;
+  color:#f3e9d8; font-family:'Manrope',sans-serif; font-size:.82rem;
+  letter-spacing:.14em; text-transform:uppercase;
+  text-shadow:0 2px 12px rgba(0,0,0,.8); will-change:opacity;
+}
+.eh-hint .mouse{ width:26px; height:42px; border:2px solid rgba(255,255,255,.7); border-radius:14px; position:relative; }
+.eh-hint .mouse::after{
+  content:""; position:absolute; left:50%; top:8px; width:4px; height:8px;
+  background:#fff; border-radius:2px; transform:translateX(-50%);
+  animation:eh-wheel 1.5s ease-in-out infinite;
+}
+@keyframes eh-wheel{ 0%{opacity:0;transform:translate(-50%,0)} 30%{opacity:1} 100%{opacity:0;transform:translate(-50%,12px)} }
+
+/* кнопка «пропустить» */
+.eh-skip{
+  position:absolute; top:20px; right:20px; z-index:6;
+  font-family:'Manrope',sans-serif; font-size:.82rem; color:#e8e0d2;
+  text-decoration:none; padding:8px 16px;
+  border:1px solid rgba(255,255,255,.3); border-radius:100px;
+  background:rgba(0,0,0,.32);
+  transition:color .2s ease, border-color .2s ease, background .2s ease;
+  cursor:pointer;
+}
+.eh-skip:hover{ color:#fff; border-color:rgba(255,255,255,.7); background:rgba(0,0,0,.5); }
+
+/* полоска прогресса сцены */
+.eh-progress{
+  position:absolute; left:0; bottom:0; height:3px; width:0%; z-index:6;
+  background:linear-gradient(90deg,var(--amber),#ffd27a);
+  box-shadow:0 0 12px rgba(240,163,43,.7);
+}
+
+/* шапка сайта уезжает вверх на время интро */
+header{ transition:transform .45s ease, opacity .45s ease; }
+body.eh-immersed header{ transform:translateY(-100%); opacity:0; pointer-events:none; }
+
+/* доступность: у кого выключены анимации — интро не показываем */
+@media (prefers-reduced-motion: reduce){ .enter-house{ display:none; } }
+
+/* мобильные: сцена короче */
+@media (max-width:640px){
+  .enter-house{ height:440vh; }
+  .eh-beat .inner{ padding:26px 22px; }
+}

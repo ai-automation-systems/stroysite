@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Строительство частных домов под ключ | [НАЗВАНИЕ КОМПАНИИ]</title>
-<meta name="description" content="Строим частные дома под ключ в [РЕГИОН]: от проекта до отделки. Фиксированная смета в договоре, гарантия 5 лет, поэтапная оплата. Бесплатный расчёт стоимости за 1 день.">
+<title>Строительство частных домов под ключ | ВЛучшемДоме</title>
+<meta name="description" content="Строим частные дома под ключ в Воронежской области: от проекта до отделки. Фиксированная смета в договоре, гарантия до 10 лет, поэтапная оплата. Бесплатный расчёт стоимости за 1 день.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Manrope:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Cpath d=%27M16 4 3 15h4v13h8v-8h2v8h8V15h4z%27 fill=%27%23F0A32B%27/%3E%3C/svg%3E">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="house-intro.css">
 
 <!-- ================= ЯНДЕКС.МЕТРИКА =================
 Создайте счётчик на metrika.yandex.ru, вставьте код сюда
@@ -21,28 +22,93 @@
 
 <header>
   <div class="container header-inner">
-    <a class="logo" href="index.html">[НАЗ<b>ВАНИЕ]</b></a>
+    <a class="logo" href="index.html">ВЛучшем<b>Доме</b></a>
     <nav class="main-nav" id="nav">
       <a href="index.html" aria-current="page">Главная</a>
       <a href="works.html">Наши работы</a>
       <a href="contacts.html">Контакты</a>
     </nav>
-    <a class="header-phone" href="tel:+79000000000" onclick="ymGoal('phone_click')">+7 (900) 000-00-00</a>
+    <a class="header-phone" href="tel:+79521019300" onclick="ymGoal('phone_click')">+7 (952) 101-93-00</a>
     <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
   </div>
 </header>
+
+<!-- ===================== КИНЕМАТОГРАФИЧНОЕ ИНТРО «ВХОД В ДОМ» =====================
+     Фасад дома → подходим к двери → входим → панорама по интерьеру со смыслами.
+     Реальные фото + «камера» на скролле. Логика — house-intro.js/css.
+     Пользователям с prefers-reduced-motion блок скрыт (сразу обычный сайт). -->
+<section class="enter-house" aria-label="Знакомство с компанией">
+  <div class="eh-stage">
+    <a class="eh-skip" href="#calc">Пропустить →</a>
+
+    <!-- Фото-слои -->
+    <div class="eh-layer eh-ext">
+      <img src="assets/exterior.jpg" alt="Современный частный дом под ключ в сумерках с тёплым светом в окнах">
+    </div>
+    <div class="eh-layer eh-int">
+      <img src="assets/interior.jpg" alt="Светлый интерьер частного дома: прихожая с входной дверью и гостиная">
+    </div>
+
+    <div class="eh-flash"></div>
+    <div class="eh-scrim"></div>
+
+    <!-- Текст -->
+    <div class="eh-beats">
+      <!-- стартовый заголовок на фасаде -->
+      <div class="eh-title">
+        Дом, о котором вы <b>мечтали</b>
+      </div>
+
+      <!-- кадр 1: вошли -->
+      <div class="eh-beat">
+        <div class="inner">
+          <h2>Добро пожаловать <b>домой</b></h2>
+          <p>Каждый наш дом начинается с двери, которую однажды откроете вы.</p>
+        </div>
+      </div>
+
+      <!-- кадр 2: цена в договоре -->
+      <div class="eh-beat">
+        <div class="inner">
+          <h2>Цена, <b>зафиксированная</b> в договоре</h2>
+          <p>Смета не вырастет по ходу стройки — это условие договора, а не обещание на словах.</p>
+        </div>
+      </div>
+
+      <!-- кадр 3: оплата по этапам -->
+      <div class="eh-beat">
+        <div class="inner">
+          <h2>Платите <b>за результат</b>, а не авансом</h2>
+          <p>Оплата разбита на этапы: приняли работу — оплатили этап. Никакой стопроцентной предоплаты.</p>
+        </div>
+      </div>
+
+      <!-- кадр 4: гарантия + призыв -->
+      <div class="eh-beat">
+        <div class="inner">
+          <h2>Дом, в котором <b>спокойно</b></h2>
+          <p>До 10 лет письменной гарантии на конструктив. Осталось сделать первый шаг.</p>
+          <a class="eh-cta" href="#calc">Рассчитать мой дом →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="eh-hint"><span>листайте вниз</span><span class="mouse"></span></div>
+    <div class="eh-progress"></div>
+  </div>
+</section>
 
 <!-- ===================== ГЛАВНЫЙ ЭКРАН ===================== -->
 <section class="hero">
   <div class="container hero-grid">
     <div>
-      <span class="section-label">Строим в [РЕГИОН] с [ГОД]</span>
+      <span class="section-label">Строим в Воронежской области с [ГОД]</span>
       <h1>Ваш дом под ключ — по цене, <b>зафиксированной в договоре</b></h1>
       <p class="hero-sub">Проектируем и строим частные дома для постоянного проживания: от фундамента до чистовой отделки. Смета не вырастет в процессе — это условие договора, а не обещание.</p>
       <ul class="hero-points">
         <li>Фиксированная смета — доплат «по ходу стройки» не будет</li>
         <li>Поэтапная оплата: платите за результат каждого этапа</li>
-        <li>Гарантия 5 лет на конструктив, прописана в договоре</li>
+        <li>Гарантия до 10 лет на конструктив, прописана в договоре</li>
         <li>Фотоотчёты со стройки каждую неделю</li>
       </ul>
       <a href="#calc" class="btn btn-primary">Рассчитать стоимость дома</a>
@@ -79,9 +145,9 @@
 <!-- ===================== ЦИФРЫ ===================== -->
 <div class="stats-band">
   <div class="container stats-grid">
-    <div class="stat"><b>[XX]<i>+</i></b><span>домов построено и сдано</span></div>
-    <div class="stat"><b>[X]<i> лет</i></b><span>строим в [РЕГИОН]</span></div>
-    <div class="stat"><b>5<i> лет</i></b><span>письменная гарантия на конструктив</span></div>
+    <div class="stat"><b>350<i>+</i></b><span>домов построено и сдано</span></div>
+    <div class="stat"><b>15<i> лет</i></b><span>строим в Воронежской области</span></div>
+    <div class="stat"><b>10<i> лет</i></b><span>письменная гарантия на конструктив</span></div>
     <div class="stat"><b>0<i> ₽</i></b><span>предоплата до подписания договора</span></div>
   </div>
 </div>
@@ -114,8 +180,8 @@
       </div>
       <div class="adv-card">
         <span class="num">05 / гарантия</span>
-        <h3>Гарантия 5 лет</h3>
-        <p>На несущие конструкции — 5 лет письменной гарантии. Если что-то пойдёт не так — устраняем за свой счёт.</p>
+        <h3>Гарантия до 10 лет</h3>
+        <p>На несущие конструкции — до 10 лет письменной гарантии. Если что-то пойдёт не так — устраняем за свой счёт.</p>
       </div>
       <div class="adv-card">
         <span class="num">06 / сроки</span>
@@ -133,7 +199,7 @@
     <h2>Три проверенные технологии</h2>
     <div class="grid-3">
       <div class="tech-card">
-        <div class="tech-head"><h3>Газобетон</h3><span class="mono">от 42 т₽/м²</span></div>
+        <div class="tech-head"><h3>Газобетон</h3><span class="mono">от 45 т₽/м²</span></div>
         <div class="tech-body">
           <p style="font-size:.92rem">Тёплый каменный дом на десятилетия. Самый популярный выбор для постоянного проживания.</p>
           <ul>
@@ -145,7 +211,7 @@
         <div class="tech-foot">Срок: 5–7 месяцев</div>
       </div>
       <div class="tech-card">
-        <div class="tech-head"><h3>Каркас</h3><span class="mono">от 35 т₽/м²</span></div>
+        <div class="tech-head"><h3>Каркас</h3><span class="mono">от 40 т₽/м²</span></div>
         <div class="tech-body">
           <p style="font-size:.92rem">Самый быстрый и доступный способ въехать в свой дом — без потери тепла и комфорта.</p>
           <ul>
@@ -157,16 +223,16 @@
         <div class="tech-foot">Срок: 3–4 месяца</div>
       </div>
       <div class="tech-card">
-        <div class="tech-head"><h3>Брус</h3><span class="mono">от 40 т₽/м²</span></div>
+        <div class="tech-head"><h3>Кирпич</h3><span class="mono">от 55 т₽/м²</span></div>
         <div class="tech-body">
-          <p style="font-size:.92rem">Классический деревянный дом: живой материал, здоровый микроклимат и вид, который не надоедает.</p>
+          <p style="font-size:.92rem">Самый долговечный и премиальный вариант: дом на века с высокой тепло- и звукоизоляцией.</p>
           <ul>
-            <li>Экологичный и «дышащий» дом</li>
-            <li>Фасад и интерьер почти без отделки</li>
-            <li>Отлично подходит для дома и бани</li>
+            <li>Срок службы — более 100 лет</li>
+            <li>Отличная тепло- и шумоизоляция</li>
+            <li>Солидный вид и высокая ликвидность дома</li>
           </ul>
         </div>
-        <div class="tech-foot">Срок: 4–6 месяцев</div>
+        <div class="tech-foot">Срок: 6–8 месяцев</div>
       </div>
     </div>
 
@@ -175,7 +241,7 @@
         <path d="M32 4 8 14v16c0 15 10 25 24 30 14-5 24-15 24-30V14L32 4z" stroke="#D68C15" stroke-width="3" fill="#FFF7E8"/>
         <path d="M22 32l7 7 13-14" stroke="#D68C15" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
-      <p><b>Гарантия — в договоре, а не на словах</b>5 лет на несущие конструкции и 2 года на инженерные системы и отделку. Все обязательства зафиксированы письменно — вы защищены даже через годы после сдачи дома.</p>
+      <p><b>Гарантия — в договоре, а не на словах</b>До 10 лет на несущие конструкции и 2 года на инженерные системы и отделку. Все обязательства зафиксированы письменно — вы защищены даже через годы после сдачи дома.</p>
     </div>
   </div>
 </section>
@@ -202,27 +268,27 @@
     <h2>Примеры вашего будущего дома</h2>
     <div class="projects">
       <article class="project-card">
-        <img src="assets/project-1.svg" alt="Одноэтажный дом 96 м² — проект «Первый»" loading="lazy">
+        <img src="assets/project-1.svg" alt="Одноэтажный дом 77 м² — проект «Первый»" loading="lazy">
         <div class="project-body">
           <h3>Проект «Первый»</h3>
-          <div class="project-specs"><span>96 м²</span><span>12,0 × 8,0 м</span><span>3 спальни</span><span>1 этаж</span></div>
-          <p class="project-price">от 4 200 000 ₽ <small>под ключ, с инженерией</small></p>
+          <div class="project-specs"><span>77 м²</span><span>10,0 × 8,0 м</span><span>2 спальни</span><span>1 этаж</span></div>
+          <p class="project-price">от 3 700 000 ₽ <small>под ключ, с инженерией</small></p>
         </div>
       </article>
       <article class="project-card">
-        <img src="assets/project-2.svg" alt="Дом с мансардой 128 м² — проект «Семейный»" loading="lazy">
+        <img src="assets/project-2.svg" alt="Одноэтажный дом 108 м² — проект «Семейный»" loading="lazy">
         <div class="project-body">
           <h3>Проект «Семейный»</h3>
-          <div class="project-specs"><span>128 м²</span><span>10,0 × 9,0 м</span><span>4 спальни</span><span>мансарда</span></div>
-          <p class="project-price">от 5 900 000 ₽ <small>под ключ, с инженерией</small></p>
+          <div class="project-specs"><span>108 м²</span><span>12,0 × 9,0 м</span><span>3 спальни</span><span>1 этаж</span></div>
+          <p class="project-price">от 5 160 000 ₽ <small>под ключ, с инженерией</small></p>
         </div>
       </article>
       <article class="project-card">
-        <img src="assets/project-3.svg" alt="Двухэтажный дом 160 м² — проект «Простор»" loading="lazy">
+        <img src="assets/project-3.svg" alt="Двухэтажный дом 130 м² — проект «Простор»" loading="lazy">
         <div class="project-body">
           <h3>Проект «Простор»</h3>
-          <div class="project-specs"><span>160 м²</span><span>11,0 × 10,0 м</span><span>5 комнат</span><span>2 этажа</span></div>
-          <p class="project-price">от 7 400 000 ₽ <small>под ключ, с инженерией</small></p>
+          <div class="project-specs"><span>130 м²</span><span>10,0 × 9,0 м</span><span>4 комнаты</span><span>2 этажа</span></div>
+          <p class="project-price">от 6 220 000 ₽ <small>под ключ, с инженерией</small></p>
         </div>
       </article>
     </div>
@@ -238,15 +304,15 @@
     <div class="reviews">
       <div class="review">
         <p>«Больше всего боялись, что смета вырастет в два раза, как у знакомых. Здесь итоговая сумма совпала с договором до рубля. Дом сдали на две недели раньше срока».</p>
-        <div class="who">Александр П. <span>дом 96 м², [НАСЕЛЁННЫЙ ПУНКТ]</span></div>
+        <div class="who">Александр П. <span>дом 77 м², Воронеж</span></div>
       </div>
       <div class="review">
         <p>«Живём в другом городе, стройку видели только по отчётам — каждую неделю фото и видео, на все вопросы отвечали в тот же день. Приехали уже на готовый дом».</p>
-        <div class="who">Анна и Сергей К. <span>дом 128 м², [НАСЕЛЁННЫЙ ПУНКТ]</span></div>
+        <div class="who">Анна и Сергей К. <span>дом 108 м², Воронеж</span></div>
       </div>
       <div class="review">
         <p>«Понравилось, что не давили и не торопили с договором. Разобрали смету по каждой позиции, что-то убрали, что-то заменили. Ощущение, что строили вместе».</p>
-        <div class="who">Ирина С. <span>дом 110 м², [НАСЕЛЁННЫЙ ПУНКТ]</span></div>
+        <div class="who">Ирина С. <span>дом 110 м², Воронеж</span></div>
       </div>
     </div>
   </div>
@@ -259,7 +325,7 @@
     <h2>Частые вопросы</h2>
     <details>
       <summary>Сколько стоит построить дом под ключ?</summary>
-      <div class="answer">Ориентир — от 4,2 млн ₽ за одноэтажный дом около 100 м² с инженерными сетями и чистовой отделкой. Точная цена зависит от проекта, материалов и участка — предварительный расчёт делаем бесплатно за 1 день.</div>
+      <div class="answer">Ориентир — от 3,7 млн ₽ за одноэтажный дом ~77 м² с инженерными сетями и чистовой отделкой; дом ~108 м² — от 5,16 млн ₽. Точная цена зависит от проекта, материалов и участка — предварительный расчёт делаем бесплатно за 1 день.</div>
     </details>
     <details>
       <summary>Можно ли строить в ипотеку или с использованием маткапитала?</summary>
@@ -293,8 +359,8 @@
   <div class="container">
     <div class="footer-grid">
       <div>
-        <a class="logo" href="index.html">[НАЗ<b>ВАНИЕ]</b></a>
-        <p style="margin-top:12px;max-width:340px">Строительство частных домов под ключ в [РЕГИОН]. От проекта до новоселья — с фиксированной сметой и гарантией.</p>
+        <a class="logo" href="index.html">ВЛучшем<b>Доме</b></a>
+        <p style="margin-top:12px;max-width:340px">Строительство частных домов под ключ в Воронежской области. От проекта до новоселья — с фиксированной сметой и гарантией.</p>
       </div>
       <div class="footer-links">
         <a href="index.html">Главная</a>
@@ -304,18 +370,19 @@
       <div class="footer-links">
         <a href="privacy.html">Политика конфиденциальности</a>
         <a href="oferta.html">Публичная оферта</a>
-        <a href="tel:+79000000000">+7 (900) 000-00-00</a>
+        <a href="tel:+79521019300">+7 (952) 101-93-00</a>
       </div>
     </div>
     <div class="footer-legal">
-      Исполнитель: [ФАМИЛИЯ ИМЯ ОТЧЕСТВО], самозанятый (плательщик НПД), ИНН [ВАШ ИНН].<br>
-      © <span id="year"></span> [НАЗВАНИЕ КОМПАНИИ]. Информация на сайте не является публичной офертой в части цен: точная стоимость определяется договором.
+      Исполнитель: Привезенцева Анастасия Дмитриевна, самозанятая (плательщик НПД), ИНН 710306903654.<br>
+      © <span id="year"></span> ВЛучшемДоме. Информация на сайте не является публичной офертой в части цен: точная стоимость определяется договором.
     </div>
   </div>
 </footer>
 
-<a class="call-fab" href="tel:+79000000000" onclick="ymGoal('phone_click')">Позвонить бесплатно</a>
+<a class="call-fab" href="tel:+79521019300" onclick="ymGoal('phone_click')">Позвонить бесплатно</a>
 
 <script src="script.js"></script>
+<script src="house-intro.js"></script>
 </body>
 </html>
