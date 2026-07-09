@@ -6,7 +6,7 @@
    без рисованной графики, без тяжёлых теней и блюра. Плавно.
    ============================================================ */
 
-:root{ --amber:#F0A32B; --amber-deep:#D68C15; }
+:root{ --amber:#1B1F24; --amber-deep:#000; }
 
 /* высокий трек прокрутки — задаёт длительность всей сцены */
 .enter-house{ position:relative; height:520vh; background:#000; }
@@ -89,14 +89,14 @@
 }
 .eh-beat .eh-cta{
   display:inline-block; margin-top:24px;
-  background:var(--amber); color:#1a1206; font-weight:700;
+  background:var(--amber); color:#fff; font-weight:700;
   font-family:'Manrope',sans-serif; font-size:1.05rem;
   padding:15px 34px; border-radius:12px; text-decoration:none;
-  box-shadow:0 12px 30px rgba(240,163,43,.4);
+  box-shadow:0 12px 30px rgba(27,31,36,.3);
   transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
   cursor:pointer;
 }
-.eh-beat .eh-cta:hover{ background:#ffb43e; transform:translateY(-2px); box-shadow:0 16px 40px rgba(240,163,43,.55); }
+.eh-beat .eh-cta:hover{ background:#33383F; transform:translateY(-2px); box-shadow:0 16px 40px rgba(27,31,36,.4); }
 
 /* подсказка «листайте вниз» */
 .eh-hint{
@@ -130,8 +130,8 @@
 /* полоска прогресса сцены */
 .eh-progress{
   position:absolute; left:0; bottom:0; height:3px; width:0%; z-index:6;
-  background:linear-gradient(90deg,var(--amber),#ffd27a);
-  box-shadow:0 0 12px rgba(240,163,43,.7);
+  background:linear-gradient(90deg,#1B1F24,#5E6660);
+  box-shadow:0 0 10px rgba(27,31,36,.4);
 }
 
 /* шапка сайта уезжает вверх на время интро */
@@ -146,3 +146,58 @@ body.eh-immersed header{ transform:translateY(-100%); opacity:0; pointer-events:
   .enter-house{ height:440vh; }
   .eh-beat .inner{ padding:26px 22px; }
 }
+
+/* ============================================================
+   СВЕТЛАЯ ВЕРСИЯ ИНТРО (переопределения)
+   Дом показываем ЦЕЛИКОМ (contain) на кремовом фоне под цвет
+   картинки → без обрезки. Текст тёмный, шапка остаётся видимой.
+   ============================================================ */
+.enter-house{ background:#E2DCD4; }
+.eh-stage{ background:#E2DCD4; }
+
+/* фасад-рендер целиком, без кропа: поля сливаются с фоном картинки */
+.eh-ext img{ object-fit:contain; }
+
+/* мягкая светлая подложка вместо тёмной вуали */
+.eh-scrim{
+  background:linear-gradient(180deg,
+    rgba(226,220,212,.72) 0%, rgba(226,220,212,0) 26%,
+    rgba(226,220,212,0) 60%, rgba(226,220,212,.92) 100%);
+}
+
+/* стартовый SEO-заголовок (H1) — крупно в нижнем-левом углу, дом дышит сверху */
+.eh-title{
+  color:#1B1F24; top:auto; bottom:12%; left:0; right:0;
+  text-align:left; padding:0;
+}
+.eh-title-inner{ max-width:1160px; margin:0 auto; padding:0 24px; }
+.eh-rule{ display:block; width:60px; height:3px; background:#1B1F24; margin-bottom:22px; }
+.eh-title h1{
+  font-family:'Oswald',sans-serif; font-weight:600; text-transform:uppercase;
+  letter-spacing:.01em; line-height:1.1; margin:0; color:inherit;
+  max-width:min(620px,82vw); font-size:clamp(1.6rem,3.7vw,2.9rem);
+  text-shadow:0 1px 22px rgba(255,255,255,.7);
+}
+.eh-title h1 b{ color:inherit; font-weight:600; }
+
+/* смысловые карточки-слайды — светлое стекло, тёмный текст */
+.eh-beat .inner{
+  background:rgba(255,255,255,.93);
+  border:1px solid rgba(27,31,36,.14);
+  color:#1B1F24;
+  box-shadow:0 24px 60px rgba(27,31,36,.18);
+}
+.eh-beat h2{ color:#1B1F24; text-shadow:none; }
+.eh-beat h2 b{ color:inherit; }
+.eh-beat p{ color:#5E6660; }
+
+/* подсказка сдвинута вправо, чтобы не пересекаться с заголовком слева */
+.eh-hint{ color:#5E6660; text-shadow:none; left:auto; right:28px; transform:none; }
+.eh-hint span:first-child{ display:none; }
+.eh-hint .mouse{ border-color:rgba(27,31,36,.45); }
+.eh-hint .mouse::after{ background:#1B1F24; }
+.eh-skip{ top:82px; color:#3A4048; border-color:rgba(27,31,36,.25); background:rgba(255,255,255,.7); }
+.eh-skip:hover{ color:#1B1F24; border-color:rgba(27,31,36,.6); background:#fff; }
+
+/* шапка остаётся видимой во время интро (как на макете) */
+body.eh-immersed header{ transform:none; opacity:1; pointer-events:auto; }

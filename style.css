@@ -6,8 +6,8 @@
   --concrete:#F2F3F1;      /* фон */
   --graphite:#1B1F24;      /* тёмный текст и тёмные секции */
   --graphite-2:#2A3038;    /* карточки на тёмном */
-  --amber:#F0A32B;         /* акцент */
-  --amber-dark:#D68C15;
+  --amber:#1B1F24;         /* акцент → монохром-графит (без оранжевого) */
+  --amber-dark:#33383F;    /* ховер/светлее */
   --line:#C9CCC7;          /* чертёжные линии */
   --muted:#5E6660;         /* вторичный текст */
   --white:#FFFFFF;
@@ -59,7 +59,7 @@ section{padding:72px 0}
 }
 .btn:hover{transform:translateY(-2px)}
 .btn:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
-.btn-primary{background:var(--amber);color:var(--graphite);box-shadow:0 4px 14px rgba(240,163,43,.35)}
+.btn-primary{background:var(--amber);color:var(--white);box-shadow:0 6px 18px rgba(27,31,36,.22)}
 .btn-primary:hover{background:var(--amber-dark)}
 .btn-outline{background:transparent;color:var(--graphite);border:2px solid var(--graphite)}
 .btn-outline.on-dark{color:var(--white);border-color:var(--white)}
@@ -71,8 +71,9 @@ header{
   border-bottom:1px solid var(--line);
 }
 .header-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
-.logo{font-family:'Oswald',sans-serif;font-size:1.3rem;text-transform:uppercase;text-decoration:none;font-weight:600}
+.logo{display:inline-flex;align-items:center;gap:11px;font-family:'Oswald',sans-serif;font-size:1.2rem;text-transform:uppercase;text-decoration:none;font-weight:600;letter-spacing:.03em}
 .logo b{color:var(--graphite)}
+.logo-mark{width:38px;height:38px;flex-shrink:0;display:block}
 nav.main-nav{display:flex;gap:26px}
 nav.main-nav a{text-decoration:none;font-size:.92rem;font-weight:600;color:var(--graphite);padding:4px 0;border-bottom:2px solid transparent}
 nav.main-nav a:hover,nav.main-nav a[aria-current="page"]{border-bottom-color:var(--amber)}
@@ -82,7 +83,7 @@ nav.main-nav a:hover,nav.main-nav a[aria-current="page"]{border-bottom-color:var
 
 /* ---------- Hero ---------- */
 .hero{
-  padding:80px 0 90px;
+  padding:56px 0 80px;
   background:
     linear-gradient(rgba(242,243,241,.6),rgba(242,243,241,.6)),
     repeating-linear-gradient(0deg,transparent,transparent 39px,var(--line) 40px),
@@ -159,6 +160,7 @@ nav.main-nav a:hover,nav.main-nav a[aria-current="page"]{border-bottom-color:var
 .project-specs{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--muted);margin:8px 0 4px;display:flex;flex-wrap:wrap;gap:6px 14px}
 .project-price{font-family:'Oswald',sans-serif;font-size:1.25rem;margin-top:auto;padding-top:14px}
 .project-price small{font-size:.7rem;color:var(--muted);display:block;font-family:'Manrope',sans-serif;text-transform:none;font-weight:400}
+.project-desc{font-size:.9rem;color:var(--muted);margin-top:12px}
 
 /* ---------- Отзывы ---------- */
 .reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
@@ -175,10 +177,11 @@ details[open] summary::after{content:"–"}
 details .answer{padding:0 22px 18px;color:var(--muted);font-size:.95rem}
 
 /* ---------- CTA-полоса ---------- */
-.cta-band{background:var(--amber);padding:56px 0}
+.cta-band{background:var(--graphite);padding:56px 0}
 .cta-band .container{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
-.cta-band h2{margin:0}
-.cta-band .btn{background:var(--graphite);color:var(--white)}
+.cta-band h2{margin:0;color:var(--white)}
+.cta-band .btn{background:var(--white);color:var(--graphite)}
+.cta-band .btn:hover{background:#E7E9E6}
 
 /* ---------- Контакты ---------- */
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
@@ -206,9 +209,9 @@ footer .logo{color:var(--white)}
 .call-fab{
   display:none;position:fixed;bottom:16px;left:16px;right:16px;z-index:99;
   text-align:center;padding:16px;border-radius:12px;
-  background:var(--amber);color:var(--graphite);
+  background:var(--graphite);color:var(--white);
   font-family:'Oswald',sans-serif;text-transform:uppercase;font-size:1rem;
-  text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.25);
+  text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.35);
 }
 
 /* ---------- Адаптив ---------- */
