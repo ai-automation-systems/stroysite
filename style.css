@@ -155,6 +155,18 @@ nav.main-nav a:hover,nav.main-nav a[aria-current="page"]{border-bottom-color:var
 .projects{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
 .project-card{background:var(--white);border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);display:flex;flex-direction:column}
 .project-card img,.project-card svg{width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--concrete)}
+.project-media{position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--concrete);cursor:pointer}
+.project-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.project-media .plan{opacity:0;transition:opacity .35s ease}
+.project-media:hover .plan,.project-media.show-plan .plan{opacity:1}
+.media-hint{
+  position:absolute;right:10px;bottom:10px;z-index:2;
+  font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--white);background:rgba(27,31,36,.72);padding:5px 10px;border-radius:6px;
+  pointer-events:none;transition:opacity .25s ease;
+}
+.media-hint::before{content:"⇄ "}
+.project-media:hover .media-hint,.project-media.show-plan .media-hint{opacity:0}
 .project-body{padding:22px;flex:1;display:flex;flex-direction:column}
 .project-body h3{font-size:1.1rem}
 .project-specs{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--muted);margin:8px 0 4px;display:flex;flex-wrap:wrap;gap:6px 14px}

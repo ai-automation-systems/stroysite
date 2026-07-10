@@ -56,6 +56,11 @@ document.querySelectorAll('form[action*="formspree"]').forEach((form) => {
   });
 });
 
+// ===== Карточки проектов: фасад ↔ планировка по тапу (моб.) =====
+document.querySelectorAll('.project-media').forEach((m) => {
+  m.addEventListener('click', () => m.classList.toggle('show-plan'));
+});
+
 // ===== Плавное появление секций =====
 if ('IntersectionObserver' in window) {
   const io = new IntersectionObserver((entries) => {
