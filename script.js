@@ -32,7 +32,7 @@ if ('IntersectionObserver' in window) {
 // ===== Карточки проектов: фасад ↔ планировка по тапу =====
 document.querySelectorAll('.project-media').forEach((m) => m.addEventListener('click', () => m.classList.toggle('show-plan')));
 
-// ===== Фильтры «Наши работы» =====
+// ===== Фильтры «Наши работы» и «Отзывы» =====
 document.querySelectorAll('[data-filter]').forEach((chip) => {
   chip.addEventListener('click', () => {
     const group = chip.closest('.filters');
@@ -41,6 +41,22 @@ document.querySelectorAll('[data-filter]').forEach((chip) => {
     const val = chip.getAttribute('data-filter');
     document.querySelectorAll('[data-case]').forEach((card) => {
       card.style.display = val === 'all' || card.getAttribute('data-case') === val ? '' : 'none';
+    });
+    // Пустое состояние: если после фильтра в сетке ничего не осталось —
+    // показываем подпись, чтобы вкладка не выглядела пустой/сломанной.
+    document.querySelectorAll('.reviews, .projects').forEach((grid) => {
+      const hasVisible = Array.prototype.some.call(
+        grid.querySelectorAll('[data-case]'),
+        (c) => c.style.display !== 'none'
+      );
+      let empty = grid.nextElementSibling;
+      if (!empty || !empty.classList.contains('filter-empty')) {
+        empty = document.createElement('p');
+        empty.className = 'filter-empty note-var';
+        grid.parentNode.insertBefore(empty, grid.nextSibling);
+      }
+      empty.textContent = 'В этом направлении пока нет опубликованных примеров — добавим по мере накопления, только реальные.';
+      empty.style.display = hasVisible ? 'none' : '';
     });
   });
 });
