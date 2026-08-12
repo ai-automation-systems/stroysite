@@ -109,3 +109,30 @@
 
 /* ---------- Мелкая заметка «данные — переменные» ---------- */
 .note-var{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--muted);margin-top:10px}
+
+/* ---------- Плавающая кнопка связи (мессенджеры) ---------- */
+.chat-fab{position:fixed;right:20px;bottom:20px;z-index:150;display:flex;flex-direction:column;align-items:flex-end;gap:12px}
+.chat-fab-menu{display:none;flex-direction:column;gap:10px}
+.chat-fab.open .chat-fab-menu{display:flex}
+.chat-fab-item{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--white);color:var(--graphite);border:1px solid var(--line);
+  border-radius:999px;padding:9px 16px 9px 12px;text-decoration:none;
+  font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.03em;font-size:.82rem;
+  box-shadow:0 8px 24px rgba(27,31,36,.16);transition:transform .15s ease,border-color .15s ease;
+}
+.chat-fab-item:hover{transform:translateY(-2px);border-color:var(--graphite)}
+.chat-fab-item svg{width:20px;height:20px;flex-shrink:0}
+.chat-fab-toggle{
+  width:60px;height:60px;border-radius:50%;border:none;cursor:pointer;
+  background:var(--graphite);color:var(--white);
+  box-shadow:0 10px 28px rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;
+  transition:transform .15s ease,background .15s ease;
+}
+.chat-fab-toggle:hover{background:var(--amber-dark);transform:translateY(-2px)}
+.chat-fab-toggle svg{width:28px;height:28px}
+.chat-fab-toggle .ic-close{display:none}
+.chat-fab.open .chat-fab-toggle .ic-chat{display:none}
+.chat-fab.open .chat-fab-toggle .ic-close{display:block}
+/* на мобильном поднимаем над липкой кнопкой звонка */
+@media (max-width:680px){ .chat-fab{right:16px;bottom:88px} }
