@@ -138,8 +138,9 @@
 header{ transition:transform .45s ease, opacity .45s ease; }
 body.eh-immersed header{ transform:translateY(-100%); opacity:0; pointer-events:none; }
 
-/* доступность: у кого выключены анимации — интро не показываем */
-@media (prefers-reduced-motion: reduce){ .enter-house{ display:none; } }
+/* доступность: у кого выключены анимации — статичный первый экран.
+   Сами правила вынесены в конец файла (после мобильных height-переопределений),
+   чтобы height:auto гарантированно выигрывал по порядку каскада. */
 
 /* мобильные: сцена короче */
 @media (max-width:640px){
@@ -201,6 +202,28 @@ body.eh-immersed header{ transform:translateY(-100%); opacity:0; pointer-events:
 .eh-hint .mouse::after{ background:#1B1F24; }
 .eh-skip{ top:82px; color:#3A4048; border-color:rgba(27,31,36,.25); background:rgba(255,255,255,.7); }
 .eh-skip:hover{ color:#1B1F24; border-color:rgba(27,31,36,.6); background:#fff; }
+
+/* ============================================================
+   СТАТИЧНЫЙ ПЕРВЫЙ ЭКРАН ДЛЯ prefers-reduced-motion
+   (в самом конце файла — перекрывает и базовую, и мобильную высоту)
+   Вместо того чтобы прятать фото, показываем постер-кадр:
+   фасад дома целиком + заголовок H1, без скролл-сцены.
+   Полное кинематографичное интро видят те, у кого движение включено.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce){
+  .enter-house{ height:auto; }
+  /* сцена на всю высоту экрана — фото работает полноэкранным фоном, как в интро */
+  .eh-stage{ position:relative; top:auto; height:auto; min-height:88vh;
+             display:block; overflow:hidden; }
+  /* элементы, завязанные на движение, в статике не нужны */
+  .eh-int,.eh-flash,.eh-hint,.eh-progress,.eh-skip,.eh-beat{ display:none; }
+  /* фасад — фоновым слоем на всю сцену */
+  .eh-ext{ position:absolute; inset:0; transform:none; }
+  .eh-ext img{ transform:none; width:100%; height:100%; object-fit:cover; object-position:center 42%; }
+  /* заголовок H1 — виден поверх фото, в нижнем-левом углу (как в исходном интро) */
+  .eh-beats{ position:absolute; inset:0; }
+  .eh-title{ opacity:1; transform:none; }
+}
 
 /* шапка остаётся видимой во время интро (как на макете) */
 body.eh-immersed header{ transform:none; opacity:1; pointer-events:auto; }

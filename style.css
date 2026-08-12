@@ -70,14 +70,14 @@ header{
   background:rgba(242,243,241,.92);backdrop-filter:blur(8px);
   border-bottom:1px solid var(--line);
 }
-.header-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
-.logo{display:inline-flex;align-items:center;gap:11px;font-family:'Oswald',sans-serif;font-size:1.2rem;text-transform:uppercase;text-decoration:none;font-weight:600;letter-spacing:.03em}
+.header-inner{display:flex;align-items:center;gap:22px;height:68px;max-width:none;padding:0 26px}
+.logo{display:inline-flex;align-items:center;gap:10px;font-family:'Oswald',sans-serif;font-size:1.08rem;text-transform:uppercase;text-decoration:none;font-weight:600;letter-spacing:.02em;flex-shrink:0}
 .logo b{color:var(--graphite)}
 .logo-mark{width:38px;height:38px;flex-shrink:0;display:block}
-nav.main-nav{display:flex;gap:26px}
-nav.main-nav a{text-decoration:none;font-size:.92rem;font-weight:600;color:var(--graphite);padding:4px 0;border-bottom:2px solid transparent}
+nav.main-nav{display:flex;gap:15px;flex-wrap:nowrap}
+nav.main-nav a{text-decoration:none;font-size:.86rem;font-weight:600;color:var(--graphite);padding:4px 0;border-bottom:2px solid transparent;white-space:nowrap}
 nav.main-nav a:hover,nav.main-nav a[aria-current="page"]{border-bottom-color:var(--amber)}
-.header-phone{font-family:'Oswald',sans-serif;font-size:1.05rem;text-decoration:none;white-space:nowrap}
+.header-phone{font-family:'Oswald',sans-serif;font-size:1rem;text-decoration:none;white-space:nowrap}
 .burger{display:none;background:none;border:none;cursor:pointer;padding:8px}
 .burger span{display:block;width:24px;height:2px;background:var(--graphite);margin:5px 0}
 
@@ -233,17 +233,22 @@ footer .logo{color:var(--white)}
   .steps{grid-template-columns:repeat(2,1fr)}
   .contact-grid,.footer-grid{grid-template-columns:1fr}
 }
-@media (max-width:680px){
-  section{padding:52px 0}
+/* меню не помещается в одну строку раньше 1080px → сворачиваем в бургер,
+   чтобы на десктопе всегда была ровная одна строка, а ниже — аккуратное меню */
+@media (max-width:1180px){
   nav.main-nav{
     display:none;position:absolute;top:68px;left:0;right:0;
+    margin-right:0;
     background:var(--white);flex-direction:column;gap:0;
     border-bottom:1px solid var(--line);
   }
   nav.main-nav.open{display:flex}
-  nav.main-nav a{padding:16px 20px;border-bottom:1px solid var(--line)}
+  nav.main-nav a{padding:16px 20px;border-bottom:1px solid var(--line);white-space:normal}
   .burger{display:block}
-  .header-phone{font-size:.95rem}
+}
+@media (max-width:680px){
+  section{padding:52px 0}
+  .header-phone{display:none} /* на мобильном звонок закрывает липкая кнопка снизу */
   .grid-3,.projects,.reviews,.steps{grid-template-columns:1fr}
   .call-fab{display:block}
   body{padding-bottom:76px}
