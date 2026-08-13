@@ -13,7 +13,7 @@ window.SITE = {
   phone: '+7 (952) 101-93-00',
   phoneHref: 'tel:+79521019300',
   whatsapp: 'https://wa.me/79521019300',
-  telegram: 'https://t.me/REPLACE_WITH_YOUR_NICK',
+  telegram: 'https://t.me/vskgarant',
 
   // Регион в текстах
   region: 'Воронеж и Воронежская область',
