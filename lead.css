@@ -12,7 +12,7 @@
   border:none;cursor:pointer;transition:background .15s ease;
 }
 .header-cta:hover{background:var(--amber-dark)}
-.header-actions{display:flex;align-items:center;gap:12px;margin-left:auto}
+.header-actions{display:flex;align-items:center;justify-content:flex-end;gap:12px}
 @media (max-width:960px){ .header-cta{display:none} }
 
 /* ---------- Три сценария (первый экран) ---------- */
@@ -136,3 +136,7 @@
 .chat-fab.open .chat-fab-toggle .ic-close{display:block}
 /* на мобильном поднимаем над липкой кнопкой звонка */
 @media (max-width:680px){ .chat-fab{right:16px;bottom:88px} }
+@media (max-width:420px){
+  .intent-grid{grid-template-columns:1fr}
+  .modal{padding:24px 18px}
+}

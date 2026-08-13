@@ -7,7 +7,17 @@
 // ===== Мобильное меню =====
 const burger = document.getElementById('burger');
 const nav = document.getElementById('nav');
-if (burger && nav) burger.addEventListener('click', () => nav.classList.toggle('open'));
+if (burger && nav) {
+  burger.setAttribute('aria-controls', 'nav');
+  burger.setAttribute('aria-expanded', 'false');
+  const setMenu = (open) => {
+    nav.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  };
+  burger.addEventListener('click', () => setMenu(!nav.classList.contains('open')));
+  nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenu(false)));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
+}
 
 // ===== Год в подвале =====
 const y = document.getElementById('year');
@@ -65,9 +75,9 @@ document.querySelectorAll('[data-filter]').forEach((chip) => {
 //  ОТПРАВКА ЗАЯВОК В TELEGRAM
 // ============================================================
 const INTENT_LABELS = {
-  construction: 'Построить дом',
+  construction: 'Контроль стройки',
   ready: 'Купить готовый дом',
-  expertise: 'Проверить дом',
+  expertise: 'Проверить дом или квартиру',
   choose: 'Пока сравниваю варианты',
 };
 
@@ -138,15 +148,25 @@ if (modal) {
   const form = modal.querySelector('form');
   const intentInput = modal.querySelector('input[name=intent]');
   let selectedIntent = 'choose';
+  let returnFocus = null;
+
+  backdrop.setAttribute('aria-hidden', 'true');
 
   const open = (intent) => {
+    returnFocus = document.activeElement;
     if (intent) selectIntent(intent);
     backdrop.classList.add('open');
+    backdrop.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
     const first = modal.querySelector('input[name=name]');
     setTimeout(() => first && first.focus(), 60);
   };
-  const close = () => { backdrop.classList.remove('open'); document.body.style.overflow = ''; };
+  const close = () => {
+    backdrop.classList.remove('open');
+    backdrop.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (returnFocus && typeof returnFocus.focus === 'function') returnFocus.focus();
+  };
 
   function selectIntent(val) {
     selectedIntent = val;

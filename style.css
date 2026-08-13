@@ -1,5 +1,5 @@
 /* ============================================================
-   СТИЛИ САЙТА СТРОИТЕЛЬНОЙ КОМПАНИИ
+   СТИЛИ САЙТА НЕЗАВИСИМОГО СОПРОВОЖДЕНИЯ НЕДВИЖИМОСТИ
    Палитра: светлый бетон / графит / янтарь (каска)
    ============================================================ */
 :root{
@@ -48,7 +48,7 @@ section{padding:72px 0}
   letter-spacing:.15em;text-transform:uppercase;
   display:block;margin-bottom:10px;
 }
-.section-label::before{content:"— "}
+.section-label::before{content:""}
 
 /* ---------- Кнопки ---------- */
 .btn{
@@ -70,11 +70,15 @@ header{
   background:rgba(242,243,241,.92);backdrop-filter:blur(8px);
   border-bottom:1px solid var(--line);
 }
-.header-inner{display:flex;align-items:center;gap:22px;height:68px;max-width:none;padding:0 26px}
+.header-inner{
+  display:grid;grid-template-columns:minmax(180px,1fr) minmax(650px,2.7fr) minmax(270px,1fr);
+  align-items:center;gap:clamp(24px,3vw,60px);height:72px;max-width:none;
+  padding:0 clamp(24px,4vw,76px)
+}
 .logo{display:inline-flex;align-items:center;gap:10px;font-family:'Oswald',sans-serif;font-size:1.08rem;text-transform:uppercase;text-decoration:none;font-weight:600;letter-spacing:.02em;flex-shrink:0}
 .logo b{color:var(--graphite)}
 .logo-mark{width:38px;height:38px;flex-shrink:0;display:block}
-nav.main-nav{display:flex;gap:15px;flex-wrap:nowrap}
+nav.main-nav{display:flex;justify-content:space-between;gap:clamp(12px,1.4vw,28px);flex-wrap:nowrap;width:100%}
 nav.main-nav a{text-decoration:none;font-size:.86rem;font-weight:600;color:var(--graphite);padding:4px 0;border-bottom:2px solid transparent;white-space:nowrap}
 nav.main-nav a:hover,nav.main-nav a[aria-current="page"]{border-bottom-color:var(--amber)}
 .header-phone{font-family:'Oswald',sans-serif;font-size:1rem;text-decoration:none;white-space:nowrap}
@@ -178,7 +182,11 @@ nav.main-nav a:hover,nav.main-nav a[aria-current="page"]{border-bottom-color:var
 .reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .review{background:var(--white);border-radius:var(--radius);padding:26px;border-left:4px solid var(--amber)}
 .review p{font-size:.95rem;font-style:italic}
-.review .who{margin-top:14px;font-weight:700;font-style:normal;font-size:.85rem}
+.review-person{display:flex;align-items:center;gap:12px;margin-top:18px}
+.review-avatar{width:40px;height:40px;border-radius:50%;background:var(--concrete);border:1px solid var(--line);display:grid;place-items:center;flex:0 0 40px}
+.review-avatar svg{width:29px;height:29px;fill:none;stroke:var(--graphite);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.review-avatar-pair svg{width:32px;height:32px}
+.review .who{font-weight:700;font-style:normal;font-size:.85rem}
 .review .who span{color:var(--muted);font-weight:400;display:block}
 
 /* ---------- FAQ ---------- */
@@ -208,6 +216,18 @@ details .answer{padding:0 22px 18px;color:var(--muted);font-size:.95rem}
 .doc p,.doc li{font-size:.95rem;margin-bottom:10px;color:#333}
 .doc ul,.doc ol{padding-left:22px}
 
+/* ---------- Сравнение форматов работы ---------- */
+.comparison-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--white)}
+.comparison-scroll:focus-visible{outline:3px solid rgba(27,31,36,.25);outline-offset:3px}
+.service-comparison{width:100%;min-width:860px;border-collapse:collapse;text-align:left}
+.service-comparison th,.service-comparison td{padding:18px 20px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);vertical-align:top;font-size:.9rem}
+.service-comparison th:last-child,.service-comparison td:last-child{border-right:0}
+.service-comparison tbody tr:last-child th,.service-comparison tbody tr:last-child td{border-bottom:0}
+.service-comparison thead th{background:var(--graphite);color:var(--white);font-family:'Oswald',sans-serif;font-size:1rem;font-weight:500}
+.service-comparison thead th:last-child{background:var(--amber-dark)}
+.service-comparison tbody th{font-family:'JetBrains Mono',monospace;font-size:.76rem;letter-spacing:.02em;background:var(--concrete);width:17%}
+.service-comparison tbody td:last-child{font-weight:600;background:#F8F6F0}
+
 /* ---------- Подвал ---------- */
 footer{background:var(--graphite);color:#B8BDC4;padding:48px 0 32px;font-size:.88rem}
 .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:32px;margin-bottom:28px}
@@ -235,7 +255,8 @@ footer .logo{color:var(--white)}
 }
 /* меню не помещается в одну строку раньше 1080px → сворачиваем в бургер,
    чтобы на десктопе всегда была ровная одна строка, а ниже — аккуратное меню */
-@media (max-width:1180px){
+@media (max-width:1320px){
+  .header-inner{display:flex;gap:22px;height:68px;padding:0 26px}
   nav.main-nav{
     display:none;position:absolute;top:68px;left:0;right:0;
     margin-right:0;
@@ -245,10 +266,14 @@ footer .logo{color:var(--white)}
   nav.main-nav.open{display:flex}
   nav.main-nav a{padding:16px 20px;border-bottom:1px solid var(--line);white-space:normal}
   .burger{display:block}
+  .header-actions{margin-left:auto}
 }
 @media (max-width:680px){
   section{padding:52px 0}
   .header-phone{display:none} /* на мобильном звонок закрывает липкая кнопка снизу */
+  .header-inner{padding:0 16px;gap:12px}
+  .logo{font-size:1rem}
+  .logo-mark{width:34px;height:34px}
   .grid-3,.projects,.reviews,.steps{grid-template-columns:1fr}
   .call-fab{display:block}
   body{padding-bottom:76px}

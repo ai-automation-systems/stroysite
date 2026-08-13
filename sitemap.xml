@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- TODO_CONTENT: при подключении своего домена заменить базовый URL. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://ai-automation-systems.github.io/stroysite/</loc><priority>1.0</priority></url>
-  <url><loc>https://ai-automation-systems.github.io/stroysite/construction.html</loc><priority>0.9</priority></url>
-  <url><loc>https://ai-automation-systems.github.io/stroysite/ready-homes.html</loc><priority>0.9</priority></url>
-  <url><loc>https://ai-automation-systems.github.io/stroysite/expertise.html</loc><priority>0.9</priority></url>
-  <url><loc>https://ai-automation-systems.github.io/stroysite/works.html</loc><priority>0.7</priority></url>
-  <url><loc>https://ai-automation-systems.github.io/stroysite/contacts.html</loc><priority>0.6</priority></url>
+  <url><loc>https://ai-automation-systems.github.io/stroysite/</loc><lastmod>2026-08-13</lastmod><priority>1.0</priority></url>
+  <url><loc>https://ai-automation-systems.github.io/stroysite/construction.html</loc><lastmod>2026-08-13</lastmod><priority>0.9</priority></url>
+  <url><loc>https://ai-automation-systems.github.io/stroysite/ready-homes.html</loc><lastmod>2026-08-13</lastmod><priority>0.9</priority></url>
+  <url><loc>https://ai-automation-systems.github.io/stroysite/expertise.html</loc><lastmod>2026-08-13</lastmod><priority>0.9</priority></url>
+  <url><loc>https://ai-automation-systems.github.io/stroysite/works.html</loc><lastmod>2026-08-13</lastmod><priority>0.7</priority></url>
+  <url><loc>https://ai-automation-systems.github.io/stroysite/contacts.html</loc><lastmod>2026-08-13</lastmod><priority>0.6</priority></url>
 </urlset>
