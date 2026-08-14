@@ -1,229 +1,118 @@
 /* ============================================================
-   КИНЕМАТОГРАФИЧНОЕ ИНТРО НА ФОТО
-   Фасад дома в сумерках → подходим к двери → входим →
-   панорама по интерьеру, на «якорях» всплывают смыслы.
-   Двигаем только «камеру» (transform/opacity) по реальным фото —
-   без рисованной графики, без тяжёлых теней и блюра. Плавно.
+   ФОТО-ИСТОРИЯ НА СКРОЛЛЕ (5 кадров)
+   Полноэкранные фотографии сменяют друг друга по мере прокрутки,
+   поверх — H1 и смысловые блоки. Только opacity/transform.
    ============================================================ */
 
-:root{ --amber:#1B1F24; --amber-deep:#000; }
-
-/* высокий трек прокрутки — задаёт длительность всей сцены */
-.enter-house{ position:relative; height:520vh; background:#000; }
+/* высокий трек — задаёт длительность истории */
+.enter-house{ position:relative; height:520vh; background:#0b0d10; padding:0; }
 
 /* сцена «прилипает» к экрану, пока листаем трек */
-.eh-stage{
-  position:sticky; top:0; height:100vh; overflow:hidden;
-  background:#0a0a0c;
-}
+.eh-stage{ position:sticky; top:0; height:100vh; overflow:hidden; background:#0b0d10; }
 
-/* фото-слои: только translate/scale/opacity — дёшево для GPU */
-.eh-layer{ position:absolute; inset:0; will-change:transform,opacity; }
-.eh-layer img{ width:100%; height:100%; object-fit:cover; display:block; }
-.eh-ext{ z-index:1; transform:scale(1.06); }
-.eh-int{ z-index:2; opacity:0; transform-origin:18% 50%; transform:scale(2.3); }
+/* кадры-фото: только opacity/scale — дёшево для GPU */
+.eh-frame{ position:absolute; inset:0; opacity:0; z-index:1; will-change:opacity; }
+.eh-frame:first-child{ opacity:1; }
+.eh-frame img{ width:100%; height:100%; object-fit:cover; object-position:center 45%; display:block; will-change:transform; }
 
-/* тёплая вспышка света в момент «входа в дверь» */
-.eh-flash{
-  position:absolute; inset:0; z-index:3; opacity:0; pointer-events:none;
-  will-change:opacity;
-  background:radial-gradient(60% 60% at 18% 50%, rgba(255,238,205,.95), rgba(255,220,160,.35) 40%, transparent 70%);
-}
-
-/* лёгкая затемняющая подложка для читаемости текста (один слой) */
+/* вуаль для читаемости: темнее сверху (шапка) и снизу (H1), светлее в центре (для карточек) */
 .eh-scrim{
-  position:absolute; inset:0; z-index:4; pointer-events:none;
-  background:linear-gradient(180deg, rgba(0,0,0,.42) 0%, rgba(0,0,0,.12) 34%, rgba(0,0,0,.14) 62%, rgba(0,0,0,.62) 100%);
+  position:absolute; inset:0; z-index:2; pointer-events:none;
+  background:linear-gradient(180deg,
+    rgba(11,13,16,.46) 0%, rgba(11,13,16,.12) 20%,
+    rgba(11,13,16,.06) 50%, rgba(11,13,16,.40) 76%, rgba(11,13,16,.74) 100%);
 }
 
-/* ---------- ТЕКСТ ---------- */
-.eh-beats{ position:absolute; inset:0; z-index:5; }
+/* ---------- слой текста ---------- */
+.eh-beats{ position:absolute; inset:0; z-index:3; }
 
-/* стартовый заголовок на фасаде */
-.eh-title{
-  position:absolute; left:0; right:0; top:16%;
-  text-align:center; padding:0 24px; color:#fff;
-  font-family:'Oswald',sans-serif; font-weight:600;
-  font-size:clamp(2rem,6vw,4.4rem); line-height:1.02;
-  text-shadow:0 6px 40px rgba(0,0,0,.7);
-  will-change:opacity,transform; opacity:0;
-}
-.eh-title b{ color:#fff; }
-.eh-title .sub{
-  display:block; margin-top:16px;
-  font-family:'Manrope',sans-serif; font-weight:400;
-  font-size:clamp(.95rem,1.9vw,1.2rem); letter-spacing:.02em;
-  color:#e9e2d6; text-shadow:0 2px 14px rgba(0,0,0,.8);
+/* стартовый H1 — крупно в нижнем-левом углу поверх первого кадра */
+.eh-title{ position:absolute; left:0; right:0; bottom:12%; padding:0; text-align:left; color:#fff; will-change:opacity,transform; }
+.eh-title-inner{ max-width:1160px; margin:0 auto; padding:0 clamp(24px,5vw,48px); }
+.eh-rule{ display:block; width:60px; height:3px; background:#fff; margin-bottom:22px; box-shadow:0 2px 16px rgba(0,0,0,.4); }
+.eh-title h1{
+  font-family:'Oswald',sans-serif; font-weight:600; text-transform:uppercase;
+  letter-spacing:.01em; line-height:1.08; margin:0; color:#fff;
+  max-width:min(720px,86vw); font-size:clamp(1.7rem,4.2vw,3.2rem);
+  text-shadow:0 4px 34px rgba(0,0,0,.55);
 }
 
-/* смысловые кадры внутри дома */
-.eh-beat{
-  position:absolute; inset:0;
-  display:flex; align-items:center; justify-content:center;
-  opacity:0; will-change:opacity,transform;
-}
+/* смысловые блоки — светлое стекло, тёмный текст (читаются на любом фото) */
+.eh-beat{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; opacity:0; will-change:opacity,transform; }
 .eh-beat .inner{
-  max-width:640px; margin:0 24px; text-align:center; color:#fff;
-  background:rgba(18,13,8,.42);
-  border:1px solid rgba(240,163,43,.28);
-  border-radius:20px;
-  padding:34px 40px;
-  box-shadow:0 24px 60px rgba(0,0,0,.35);
+  max-width:600px; margin:0 24px; text-align:center; color:#1B1F24;
+  background:rgba(255,255,255,.92); -webkit-backdrop-filter:blur(3px); backdrop-filter:blur(3px);
+  border:1px solid rgba(255,255,255,.7); border-radius:18px;
+  padding:34px 40px; box-shadow:0 26px 70px rgba(0,0,0,.34);
 }
 .eh-beat .label{
   display:inline-block; margin-bottom:14px;
-  font-family:'JetBrains Mono',monospace; font-size:.78rem;
-  letter-spacing:.18em; text-transform:uppercase; color:#fff;
-  padding:6px 14px; border:1px solid rgba(255,255,255,.45);
-  border-radius:100px; background:rgba(255,255,255,.12);
+  font-family:'JetBrains Mono',monospace; font-size:.72rem;
+  letter-spacing:.18em; text-transform:uppercase; color:#5E6660;
+  padding:5px 12px; border:1px solid rgba(27,31,36,.18); border-radius:100px;
 }
 .eh-beat h2{
-  font-family:'Oswald',sans-serif; font-weight:600;
-  font-size:clamp(1.8rem,5vw,3.4rem); line-height:1.06; margin:0 0 14px;
-  text-shadow:0 4px 30px rgba(0,0,0,.5);
+  font-family:'Oswald',sans-serif; font-weight:600; text-transform:uppercase;
+  font-size:clamp(1.5rem,4vw,2.6rem); line-height:1.08; margin:0 0 12px; color:#1B1F24;
 }
-.eh-beat h2 b{ color:#fff; }
 .eh-beat p{
-  font-family:'Manrope',sans-serif; font-size:clamp(1rem,2.2vw,1.2rem);
-  line-height:1.6; color:#efe8dc; margin:0 auto; max-width:520px;
+  font-family:'Manrope',sans-serif; font-size:clamp(1rem,2.1vw,1.15rem);
+  line-height:1.6; color:#5E6660; margin:0 auto; max-width:480px;
 }
 .eh-beat .eh-cta{
-  display:inline-block; margin-top:24px;
-  background:var(--amber); color:#fff; font-weight:700;
-  font-family:'Manrope',sans-serif; font-size:1.05rem;
-  padding:15px 34px; border-radius:12px; text-decoration:none;
-  box-shadow:0 12px 30px rgba(27,31,36,.3);
-  transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
-  cursor:pointer;
+  display:inline-block; margin-top:22px; background:#1B1F24; color:#fff; font-weight:700;
+  font-family:'Oswald',sans-serif; text-transform:uppercase; letter-spacing:.04em; font-size:.95rem;
+  padding:14px 32px; border-radius:10px; text-decoration:none; cursor:pointer;
+  transition:transform .2s ease, background .2s ease;
 }
-.eh-beat .eh-cta:hover{ background:#33383F; transform:translateY(-2px); box-shadow:0 16px 40px rgba(27,31,36,.4); }
+.eh-beat .eh-cta:hover{ background:#33383F; transform:translateY(-2px); }
 
 /* подсказка «листайте вниз» */
 .eh-hint{
-  position:absolute; left:50%; bottom:5%; z-index:5;
-  transform:translateX(-50%);
-  display:flex; flex-direction:column; align-items:center; gap:10px;
-  color:#f3e9d8; font-family:'Manrope',sans-serif; font-size:.82rem;
-  letter-spacing:.14em; text-transform:uppercase;
-  text-shadow:0 2px 12px rgba(0,0,0,.8); will-change:opacity;
+  position:absolute; left:50%; bottom:4.5%; z-index:3; transform:translateX(-50%);
+  display:flex; flex-direction:column; align-items:center; gap:9px;
+  color:#fff; font-family:'Manrope',sans-serif; font-size:.78rem;
+  letter-spacing:.16em; text-transform:uppercase; text-shadow:0 2px 12px rgba(0,0,0,.7); will-change:opacity;
 }
-.eh-hint .mouse{ width:26px; height:42px; border:2px solid rgba(255,255,255,.7); border-radius:14px; position:relative; }
-.eh-hint .mouse::after{
-  content:""; position:absolute; left:50%; top:8px; width:4px; height:8px;
-  background:#fff; border-radius:2px; transform:translateX(-50%);
-  animation:eh-wheel 1.5s ease-in-out infinite;
-}
+.eh-hint .mouse{ width:25px; height:40px; border:2px solid rgba(255,255,255,.75); border-radius:14px; position:relative; }
+.eh-hint .mouse::after{ content:""; position:absolute; left:50%; top:8px; width:4px; height:8px; background:#fff; border-radius:2px; transform:translateX(-50%); animation:eh-wheel 1.5s ease-in-out infinite; }
 @keyframes eh-wheel{ 0%{opacity:0;transform:translate(-50%,0)} 30%{opacity:1} 100%{opacity:0;transform:translate(-50%,12px)} }
 
 /* кнопка «пропустить» */
 .eh-skip{
-  position:absolute; top:20px; right:20px; z-index:6;
-  font-family:'Manrope',sans-serif; font-size:.82rem; color:#e8e0d2;
-  text-decoration:none; padding:8px 16px;
-  border:1px solid rgba(255,255,255,.3); border-radius:100px;
-  background:rgba(0,0,0,.32);
+  position:absolute; top:82px; right:22px; z-index:4;
+  font-family:'Manrope',sans-serif; font-size:.8rem; color:#fff; text-decoration:none;
+  padding:8px 16px; border:1px solid rgba(255,255,255,.45); border-radius:100px;
+  background:rgba(0,0,0,.28); -webkit-backdrop-filter:blur(4px); backdrop-filter:blur(4px);
   transition:color .2s ease, border-color .2s ease, background .2s ease;
-  cursor:pointer;
 }
-.eh-skip:hover{ color:#fff; border-color:rgba(255,255,255,.7); background:rgba(0,0,0,.5); }
+.eh-skip:hover{ border-color:#fff; background:rgba(0,0,0,.5); }
 
-/* полоска прогресса сцены */
+/* полоска прогресса истории */
 .eh-progress{
-  position:absolute; left:0; bottom:0; height:3px; width:0%; z-index:6;
-  background:linear-gradient(90deg,#1B1F24,#5E6660);
-  box-shadow:0 0 10px rgba(27,31,36,.4);
+  position:absolute; left:0; bottom:0; height:3px; width:0%; z-index:4;
+  background:linear-gradient(90deg,#fff,#B8BDC4); box-shadow:0 0 10px rgba(255,255,255,.4);
 }
 
-/* шапка сайта уезжает вверх на время интро */
+/* шапка остаётся видимой во время истории */
 header{ transition:transform .45s ease, opacity .45s ease; }
-body.eh-immersed header{ transform:translateY(-100%); opacity:0; pointer-events:none; }
 
-/* доступность: у кого выключены анимации — статичный первый экран.
-   Сами правила вынесены в конец файла (после мобильных height-переопределений),
-   чтобы height:auto гарантированно выигрывал по порядку каскада. */
-
-/* мобильные: сцена короче */
+/* мобильные: сцена короче, кадр держит людей ближе к центру */
 @media (max-width:640px){
-  .enter-house{ height:440vh; }
+  .enter-house{ height:460vh; }
+  .eh-frame img{ object-position:center 46%; }
   .eh-beat .inner{ padding:26px 22px; }
 }
 
 /* ============================================================
-   СВЕТЛАЯ ВЕРСИЯ ИНТРО (переопределения)
-   Дом показываем ЦЕЛИКОМ (contain) на кремовом фоне под цвет
-   картинки → без обрезки. Текст тёмный, шапка остаётся видимой.
-   ============================================================ */
-/* без глобального padding у section — иначе над сценой видна полоса фона */
-.enter-house{ background:#E2DCD4; padding:0; }
-.eh-stage{ background:#E2DCD4; }
-
-/* фасад-рендер целиком, без кропа: поля сливаются с фоном картинки */
-.eh-ext img{ object-fit:contain; }
-
-/* мягкая светлая подложка вместо тёмной вуали.
-   Сверху и снизу — цвет фона сайта (#F2F3F1), чтобы шапка и следующая
-   секция плавно «растворялись» в сцене без резкой цветной полосы на стыке. */
-.eh-scrim{
-  background:linear-gradient(180deg,
-    rgba(242,243,241,.97) 0%, rgba(238,235,229,.55) 12%, rgba(232,227,220,0) 30%,
-    rgba(232,227,220,0) 60%, rgba(242,243,241,.95) 100%);
-}
-
-/* стартовый SEO-заголовок (H1) — крупно в нижнем-левом углу, дом дышит сверху */
-.eh-title{
-  color:#1B1F24; top:auto; bottom:12%; left:0; right:0;
-  text-align:left; padding:0;
-}
-.eh-title-inner{ max-width:1160px; margin:0 auto; padding:0 24px; }
-.eh-rule{ display:block; width:60px; height:3px; background:#1B1F24; margin-bottom:22px; }
-.eh-title h1{
-  font-family:'Oswald',sans-serif; font-weight:600; text-transform:uppercase;
-  letter-spacing:.01em; line-height:1.1; margin:0; color:inherit;
-  max-width:min(620px,82vw); font-size:clamp(1.6rem,3.7vw,2.9rem);
-  text-shadow:0 1px 22px rgba(255,255,255,.7);
-}
-.eh-title h1 b{ color:inherit; font-weight:600; }
-
-/* смысловые карточки-слайды — светлое стекло, тёмный текст */
-.eh-beat .inner{
-  background:rgba(255,255,255,.93);
-  border:1px solid rgba(27,31,36,.14);
-  color:#1B1F24;
-  box-shadow:0 24px 60px rgba(27,31,36,.18);
-}
-.eh-beat h2{ color:#1B1F24; text-shadow:none; }
-.eh-beat h2 b{ color:inherit; }
-.eh-beat p{ color:#5E6660; }
-
-/* подсказка сдвинута вправо, чтобы не пересекаться с заголовком слева */
-.eh-hint{ color:#5E6660; text-shadow:none; left:auto; right:28px; transform:none; }
-.eh-hint span:first-child{ display:none; }
-.eh-hint .mouse{ border-color:rgba(27,31,36,.45); }
-.eh-hint .mouse::after{ background:#1B1F24; }
-.eh-skip{ top:82px; color:#3A4048; border-color:rgba(27,31,36,.25); background:rgba(255,255,255,.7); }
-.eh-skip:hover{ color:#1B1F24; border-color:rgba(27,31,36,.6); background:#fff; }
-
-/* ============================================================
-   СТАТИЧНЫЙ ПЕРВЫЙ ЭКРАН ДЛЯ prefers-reduced-motion
-   (в самом конце файла — перекрывает и базовую, и мобильную высоту)
-   Вместо того чтобы прятать фото, показываем постер-кадр:
-   фасад дома целиком + заголовок H1, без скролл-сцены.
-   Полное кинематографичное интро видят те, у кого движение включено.
+   ДОСТУПНОСТЬ: без анимации — статичный первый кадр + H1
    ============================================================ */
 @media (prefers-reduced-motion: reduce){
   .enter-house{ height:auto; }
-  /* сцена на всю высоту экрана — фото работает полноэкранным фоном, как в интро */
-  .eh-stage{ position:relative; top:auto; height:auto; min-height:88vh;
-             display:block; overflow:hidden; }
-  /* элементы, завязанные на движение, в статике не нужны */
-  .eh-int,.eh-flash,.eh-hint,.eh-progress,.eh-skip,.eh-beat{ display:none; }
-  /* фасад — фоновым слоем на всю сцену */
-  .eh-ext{ position:absolute; inset:0; transform:none; }
-  .eh-ext img{ transform:none; width:100%; height:100%; object-fit:cover; object-position:center 42%; }
-  /* заголовок H1 — виден поверх фото, в нижнем-левом углу (как в исходном интро) */
+  .eh-stage{ position:relative; top:auto; height:auto; min-height:86vh; display:block; }
+  .eh-frame,.eh-beat,.eh-hint,.eh-progress,.eh-skip{ display:none; }
+  .eh-frame:first-child{ display:block; opacity:1; position:absolute; inset:0; }
+  .eh-frame:first-child img{ transform:none; }
   .eh-beats{ position:absolute; inset:0; }
   .eh-title{ opacity:1; transform:none; }
 }
-
-/* шапка остаётся видимой во время интро (как на макете) */
-body.eh-immersed header{ transform:none; opacity:1; pointer-events:auto; }
