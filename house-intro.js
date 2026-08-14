@@ -8,7 +8,9 @@
 (function () {
   var section = document.querySelector('.enter-house');
   if (!section) return;
-  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  // При «уменьшить движение» историю всё равно показываем, но без «наездов»
+  // и сдвигов — только мягкое появление кадров (это допустимо и не грузит комп).
+  var reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
   var frames = Array.prototype.slice.call(section.querySelectorAll('.eh-frame'));
   var title = section.querySelector('.eh-title');
@@ -32,13 +34,13 @@
       frames[k].style.opacity = clamp(1 - Math.abs(pos - k), 0, 1).toFixed(3);
       var life = clamp((pos - (k - 1)) / 2, 0, 1);          // 0..1 за время жизни кадра
       var img = frames[k].firstElementChild;
-      if (img) img.style.transform = 'scale(' + (1.04 + life * 0.10).toFixed(4) + ')';
+      if (img) img.style.transform = reduce ? 'none' : 'scale(' + (1.04 + life * 0.10).toFixed(4) + ')';
     }
 
     // H1 — держится на первом кадре, мягко уходит вверх при прокрутке
     if (title) {
       title.style.opacity = clamp(1 - pos / 0.75, 0, 1).toFixed(3);
-      title.style.transform = 'translateY(' + (-pos * 26).toFixed(1) + 'px)';
+      title.style.transform = reduce ? 'none' : 'translateY(' + (-pos * 26).toFixed(1) + 'px)';
     }
     if (hint) hint.style.opacity = clamp(1 - pos / 0.5, 0, 1).toFixed(3);
 
@@ -49,7 +51,7 @@
       else op = clamp(1 - Math.abs(pos - c) / 0.72, 0, 1);
       beats[i].style.opacity = op.toFixed(3);
       var inner = beats[i].firstElementChild;
-      if (inner) inner.style.transform = 'translateY(' + ((pos - c) * 34).toFixed(1) + 'px)';
+      if (inner) inner.style.transform = reduce ? 'none' : 'translateY(' + ((pos - c) * 34).toFixed(1) + 'px)';
     }
   }
 
