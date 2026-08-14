@@ -12,7 +12,7 @@
 
 /* кадры-фото: только opacity/scale — дёшево для GPU */
 .eh-frame{ position:absolute; inset:0; opacity:0; z-index:1; will-change:opacity; }
-.eh-frame:first-child{ opacity:1; }
+.eh-frame.eh-first{ opacity:1; }
 .eh-frame img{ width:100%; height:100%; object-fit:cover; object-position:center 45%; display:block; will-change:transform; }
 
 /* вуаль для читаемости: темнее сверху (шапка) и снизу (H1), светлее в центре (для карточек) */
@@ -111,8 +111,8 @@ header{ transition:transform .45s ease, opacity .45s ease; }
   .enter-house{ height:auto; }
   .eh-stage{ position:relative; top:auto; height:auto; min-height:86vh; display:block; }
   .eh-frame,.eh-beat,.eh-hint,.eh-progress,.eh-skip{ display:none; }
-  .eh-frame:first-child{ display:block; opacity:1; position:absolute; inset:0; }
-  .eh-frame:first-child img{ transform:none; }
+  .eh-frame.eh-first{ display:block; opacity:1; position:absolute; inset:0; }
+  .eh-frame.eh-first img{ transform:none; }
   .eh-beats{ position:absolute; inset:0; }
   .eh-title{ opacity:1; transform:none; }
 }
