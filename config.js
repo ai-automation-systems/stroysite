@@ -14,9 +14,9 @@ window.SITE = {
   phoneHref: 'tel:+79521019300',
   whatsapp: 'https://wa.me/79521019300',
   telegram: 'https://t.me/vskgarant',
-  // MAX (мессенджер). Заглушка: когда будет профиль — заменить REPLACE_WITH_MAX
-  // на хвост ссылки из приложения (аватар → QR → Поделиться → max.ru/u/XXXX).
-  max: 'https://max.ru/u/REPLACE_WITH_MAX',
+  // MAX (мессенджер). Заглушка: временно ведёт на max.ru. Когда будет профиль —
+  // заменить на ссылку из приложения (аватар → QR → Поделиться → max.ru/u/XXXX).
+  max: 'https://max.ru/',
 
   // Регион в текстах
   region: 'Воронеж и Воронежская область',
