@@ -267,9 +267,9 @@ if (modal) {
 // ============================================================
 (function () {
   const S = window.SITE || {};
-  const KEY = 'cookie_consent_vsk';
-  let granted = false;
-  try { granted = localStorage.getItem(KEY) === 'yes'; } catch (e) {}
+  const KEY = 'cookie_notice_vsk';
+  let dismissed = false;
+  try { dismissed = localStorage.getItem(KEY) === 'yes'; } catch (e) {}
 
   function loadMetrika() {
     const id = S.metrikaId;
@@ -283,7 +283,10 @@ if (modal) {
     window.ym(id, 'init', { clickmap: true, trackLinks: true, accurateTrackBounce: true, webvisor: true });
   }
 
-  if (granted) { loadMetrika(); return; }
+  // Модель «оставаясь на сайте, вы соглашаетесь»: Метрика подключается сразу,
+  // чтобы аналитика и Директ получали полные данные с первого визита.
+  loadMetrika();
+  if (dismissed) return;
 
   const bar = document.createElement('div');
   bar.className = 'cookie-bar';
