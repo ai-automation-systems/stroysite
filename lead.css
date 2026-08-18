@@ -110,6 +110,19 @@
 /* ---------- Мелкая заметка «данные — переменные» ---------- */
 .note-var{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--muted);margin-top:10px}
 
+/* ---------- Cookie-согласие ---------- */
+.cookie-bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:190;
+  background:var(--graphite);color:#E3E6E9;padding:16px 20px;
+  box-shadow:0 -8px 30px rgba(0,0,0,.25);
+  display:flex;gap:14px 24px;align-items:center;justify-content:center;flex-wrap:wrap;
+  transform:translateY(100%);transition:transform .3s ease;
+}
+.cookie-bar.show{transform:none}
+.cookie-bar p{font-size:.85rem;line-height:1.5;margin:0;max-width:760px}
+.cookie-bar a{color:#fff;text-decoration:underline}
+.cookie-bar .btn{padding:11px 26px;font-size:.85rem;white-space:nowrap}
+
 /* ---------- Плавающая кнопка связи (мессенджеры) ---------- */
 .chat-fab{position:fixed;right:20px;bottom:20px;z-index:150;display:flex;flex-direction:column;align-items:flex-end;gap:12px}
 .chat-fab-menu{display:none;flex-direction:column;gap:10px}

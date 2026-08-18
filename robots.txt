@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /legacy/
 
-Sitemap: https://ai-automation-systems.github.io/stroysite/sitemap.xml
+Sitemap: https://vskgarant.ru/sitemap.xml

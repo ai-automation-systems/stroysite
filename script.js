@@ -94,7 +94,7 @@ const INTENT_LABELS = {
 async function sendLead(payload, statusEl, btnEl) {
   const endpoint = (window.SITE && window.SITE.leadEndpoint) || '';
   const phone = (window.SITE && window.SITE.phone) || '';
-  const configured = endpoint && !/REPLACE_WITH_YOUR_WORKER/.test(endpoint);
+  const configured = endpoint && !/REPLACE_WITH_YANDEX_FUNCTION|REPLACE_WITH_YOUR_WORKER/.test(endpoint);
 
   const setStatus = (cls, msg) => { if (statusEl) { statusEl.className = 'form-status ' + cls; statusEl.textContent = msg; } };
 
@@ -258,4 +258,48 @@ if (modal) {
   wrap.querySelectorAll('.chat-fab-item').forEach((a) => a.addEventListener('click', () => track(a.getAttribute('data-goal'))));
   document.addEventListener('click', (e) => { if (!wrap.contains(e.target)) setOpen(false); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+})();
+
+// ============================================================
+//  COOKIE-СОГЛАСИЕ + ЯНДЕКС.МЕТРИКА
+//  Метрика грузится ТОЛЬКО после согласия и только если задан
+//  metrikaId в config.js. Иначе — ничего не загружается.
+// ============================================================
+(function () {
+  const S = window.SITE || {};
+  const KEY = 'cookie_consent_vsk';
+  let granted = false;
+  try { granted = localStorage.getItem(KEY) === 'yes'; } catch (e) {}
+
+  function loadMetrika() {
+    const id = S.metrikaId;
+    if (!id || window.__ymLoaded) return;
+    window.__ymLoaded = true;
+    window.YM_COUNTER = id;
+    (function (m, e, t, r, i, k, a) {
+      m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments); }; m[i].l = 1 * new Date();
+      k = e.createElement(t); a = e.getElementsByTagName(t)[0]; k.async = 1; k.src = r; a.parentNode.insertBefore(k, a);
+    })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym');
+    window.ym(id, 'init', { clickmap: true, trackLinks: true, accurateTrackBounce: true, webvisor: true });
+  }
+
+  if (granted) { loadMetrika(); return; }
+
+  const bar = document.createElement('div');
+  bar.className = 'cookie-bar';
+  bar.setAttribute('role', 'dialog');
+  bar.setAttribute('aria-label', 'Согласие на использование cookie');
+  bar.innerHTML =
+    '<p>Мы используем файлы cookie и сервис Яндекс.Метрика, чтобы сайт работал и был удобнее. ' +
+    'Оставаясь на сайте, вы соглашаетесь с этим. Подробнее — в ' +
+    '<a href="privacy.html">политике конфиденциальности</a>.</p>' +
+    '<button class="btn btn-primary cookie-accept" type="button">Принять</button>';
+  document.body.appendChild(bar);
+  requestAnimationFrame(() => bar.classList.add('show'));
+  bar.querySelector('.cookie-accept').addEventListener('click', () => {
+    try { localStorage.setItem(KEY, 'yes'); } catch (e) {}
+    bar.classList.remove('show');
+    setTimeout(() => bar.remove(), 300);
+    loadMetrika();
+  });
 })();
