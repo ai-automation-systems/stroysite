@@ -293,10 +293,9 @@ if (modal) {
   bar.setAttribute('role', 'dialog');
   bar.setAttribute('aria-label', 'Согласие на использование cookie');
   bar.innerHTML =
-    '<p>Мы используем файлы cookie и сервис Яндекс.Метрика, чтобы сайт работал и был удобнее. ' +
-    'Оставаясь на сайте, вы соглашаетесь с этим. Подробнее — в ' +
-    '<a href="privacy.html">политике конфиденциальности</a>.</p>' +
-    '<button class="btn btn-primary cookie-accept" type="button">Принять</button>';
+    '<p>Используем cookie и Яндекс.Метрику. Оставаясь на сайте, вы соглашаетесь — ' +
+    '<a href="privacy.html">подробнее</a>.</p>' +
+    '<button class="btn btn-primary cookie-accept" type="button">Ок</button>';
   document.body.appendChild(bar);
   requestAnimationFrame(() => bar.classList.add('show'));
   bar.querySelector('.cookie-accept').addEventListener('click', () => {

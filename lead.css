@@ -112,19 +112,20 @@
 
 /* ---------- Cookie-уведомление (компактная карточка слева снизу) ---------- */
 .cookie-bar{
-  position:fixed;left:20px;bottom:20px;z-index:190;
-  width:min(340px,calc(100vw - 40px));
-  background:var(--graphite);color:#E3E6E9;padding:16px 18px;border-radius:14px;
-  box-shadow:0 18px 44px rgba(0,0,0,.32);
-  transform:translateY(18px);opacity:0;pointer-events:none;
-  transition:transform .3s ease,opacity .3s ease;
+  position:fixed;left:18px;bottom:18px;z-index:190;
+  width:min(280px,calc(100vw - 36px));
+  background:rgba(27,31,36,.96);color:#D7DBDF;padding:12px 14px;border-radius:12px;
+  box-shadow:0 12px 30px rgba(0,0,0,.28);
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  transform:translateY(14px);opacity:0;pointer-events:none;
+  transition:transform .28s ease,opacity .28s ease;
 }
 .cookie-bar.show{transform:none;opacity:1;pointer-events:auto}
-.cookie-bar p{font-size:.8rem;line-height:1.5;margin:0 0 12px}
+.cookie-bar p{font-size:.7rem;line-height:1.4;margin:0;flex:1;min-width:150px}
 .cookie-bar a{color:#fff;text-decoration:underline}
-.cookie-bar .btn{padding:9px 22px;font-size:.78rem}
+.cookie-bar .btn{padding:7px 16px;font-size:.72rem;flex-shrink:0}
 @media (max-width:680px){
-  .cookie-bar{left:12px;bottom:84px;width:calc(100vw - 96px)}
+  .cookie-bar{left:12px;bottom:84px;right:76px;width:auto}
 }
 
 /* ---------- Плавающая кнопка связи (мессенджеры) ---------- */
