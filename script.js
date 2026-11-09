@@ -18,15 +18,27 @@ const calc=document.querySelector('#calc form');
 function selectHouse(name){const select=calc.elements.project;select.value=Array.from(select.options).find(o=>o.text.startsWith(name))?.value||'Помогите выбрать';location.hash='calc';calc.elements.name.focus({preventScroll:true});track('project_select')}
 document.querySelectorAll('[data-project]').forEach(b=>b.addEventListener('click',()=>selectHouse(b.dataset.project)));
 document.querySelectorAll('[data-material]').forEach(a=>a.addEventListener('click',()=>{calc.elements.material.value=a.dataset.material}));
-// Preview only: validate fields, but do not transmit or store visitor data.
 const form=calc,status=form.querySelector('.form-status');
 form.elements.phone.addEventListener('input',()=>form.elements.phone.setCustomValidity(''));
-form.addEventListener('submit',e=>{
+form.addEventListener('submit',async e=>{
  e.preventDefault();
  if(form.elements.company.value)return;
  if(form.elements.phone.value.replace(/\D/g,'').length<10){form.elements.phone.setCustomValidity('Введите номер телефона: не менее 10 цифр.');form.elements.phone.reportValidity();return}
- status.className='form-status info';
- status.textContent='Это предварительный просмотр сайта. Заявка не отправлена.';
+ const endpoint=S.leadEndpoint||'';
+ const configured=endpoint&&!/REPLACE_WITH_YANDEX_FUNCTION|REPLACE_WITH_YOUR_WORKER/.test(endpoint);
+ const btn=form.querySelector('button[type=submit]');
+ const setStatus=(cls,msg)=>{status.className='form-status '+cls;status.textContent=msg};
+ if(!configured){setStatus('err','Форма пока настраивается. Позвоните нам: '+(S.phone||''));return}
+ const oldText=btn.textContent;
+ btn.disabled=true;btn.textContent='Отправляем…';
+ const fd=new FormData(form);
+ try{
+  const res=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:fd.get('name')||'',phone:fd.get('phone')||'',project:fd.get('project')||'',material:fd.get('material')||'',plot:fd.get('plot')||'',comment:fd.get('comment')||'',company:fd.get('company')||'',intent:'Строительство дома',page:location.pathname+location.hash})});
+  const data=await res.json().catch(()=>({}));
+  if(res.ok&&data.ok){setStatus('ok','Спасибо! Заявку получили. Специалист свяжется с вами в рабочее время.');track('lead_submit');form.reset();return}
+  throw new Error();
+ }catch{setStatus('err','Не удалось отправить. Позвоните нам: '+(S.phone||''))}
+ finally{btn.disabled=false;btn.textContent=oldText}
 });
 // Preserve the supplied counter; load it only after the consent described in the policy.
 (function(){

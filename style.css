@@ -253,9 +253,14 @@ footer .logo{color:var(--white)}
   .steps{grid-template-columns:repeat(2,1fr)}
   .contact-grid,.footer-grid{grid-template-columns:1fr}
 }
-/* меню не помещается в одну строку раньше 1080px → сворачиваем в бургер,
-   чтобы на десктопе всегда была ровная одна строка, а ниже — аккуратное меню */
-@media (max-width:1320px){
+/* На ширине ноутбука меню остаётся в шапке. Бургер — только на планшете и телефоне. */
+@media (max-width:1280px) and (min-width:961px){
+  .header-inner{gap:14px;padding:0 18px}
+  nav.main-nav{gap:12px}
+  nav.main-nav a{font-size:.78rem}
+  .header-phone{font-size:.92rem}
+}
+@media (max-width:960px){
   .header-inner{display:flex;gap:22px;height:68px;padding:0 26px}
   nav.main-nav{
     display:none;position:absolute;top:68px;left:0;right:0;
