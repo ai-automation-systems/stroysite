@@ -18,6 +18,11 @@ const calc=document.querySelector('#calc form');
 function selectHouse(name){const select=calc.elements.project;select.value=Array.from(select.options).find(o=>o.text.startsWith(name))?.value||'Помогите выбрать';location.hash='calc';calc.elements.name.focus({preventScroll:true});track('project_select')}
 document.querySelectorAll('[data-project]').forEach(b=>b.addEventListener('click',()=>selectHouse(b.dataset.project)));
 document.querySelectorAll('[data-material]').forEach(a=>a.addEventListener('click',()=>{calc.elements.material.value=a.dataset.material}));
+let finish='rough';
+const finishLabel={rough:'черновая отделка',pre:'предчистовая отделка'};
+function formatPrice(n){return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,' ')}
+function applyFinish(next){finish=next;document.querySelectorAll('.finish-switch button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.finish===next)));document.querySelectorAll('.project-price').forEach(p=>{p.querySelector('.price-value').textContent=formatPrice(p.dataset[next]);p.querySelector('small').textContent=finishLabel[next]})}
+document.querySelectorAll('.finish-switch button').forEach(b=>b.addEventListener('click',()=>applyFinish(b.dataset.finish)));
 const form=calc,status=form.querySelector('.form-status');
 form.elements.phone.addEventListener('input',()=>form.elements.phone.setCustomValidity(''));
 form.addEventListener('submit',async e=>{
@@ -33,7 +38,7 @@ form.addEventListener('submit',async e=>{
  btn.disabled=true;btn.textContent='Отправляем…';
  const fd=new FormData(form);
  try{
-  const res=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:fd.get('name')||'',phone:fd.get('phone')||'',project:fd.get('project')||'',material:fd.get('material')||'',plot:fd.get('plot')||'',comment:fd.get('comment')||'',company:fd.get('company')||'',intent:'Строительство дома',page:location.pathname+location.hash})});
+  const res=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:fd.get('name')||'',phone:fd.get('phone')||'',project:fd.get('project')||'',material:fd.get('material')||'',plot:fd.get('plot')||'',finish:finishLabel[finish],comment:fd.get('comment')||'',company:fd.get('company')||'',intent:'Строительство дома',page:location.pathname+location.hash})});
   const data=await res.json().catch(()=>({}));
   if(res.ok&&data.ok){setStatus('ok','Спасибо! Заявку получили. Специалист свяжется с вами в рабочее время.');track('lead_submit');form.reset();return}
   throw new Error();
